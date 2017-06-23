@@ -45,6 +45,24 @@ var layerGoogleRoadsCustom = L.gridLayer.googleMutant({
 });
 
 
+var mcgLayerSupportGroup = L.markerClusterGroup.layerSupport({
+		spiderfyOnMaxZoom: true,
+		showCoverageOnHover: false,
+		zoomToBoundsOnClick: true,
+		disableClusteringAtZoom: 17
+	}),
+	layerKikGroup = L.layerGroup(),
+	layerMacgeizGroup = L.layerGroup(),
+	layerTediGroup = L.layerGroup(),
+	layerActionGroup = L.layerGroup();
+
+mcgLayerSupportGroup.addTo(map);
+mcgLayerSupportGroup.checkIn([layerKikGroup, layerMacgeizGroup, layerTediGroup, layerActionGroup]);
+
+
+
+
+
 var layerKik = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
@@ -60,6 +78,7 @@ var layerKik = L.geoJson(null, {
 });
 $.getJSON("data/kik.geojson", function (data) {
 	layerKik.addData(data);
+	layerKikGroup.addLayer(layerKik);
 });
 
 
@@ -78,6 +97,7 @@ var layerMacgeiz = L.geoJson(null, {
 });
 $.getJSON("data/macgeiz.geojson", function (data) {
 	layerMacgeiz.addData(data);
+	layerMacgeizGroup.addLayer(layerMacgeiz);
 });
 
 
@@ -96,6 +116,7 @@ var layerTedi = L.geoJson(null, {
 });
 $.getJSON("data/tedi.geojson", function (data) {
 	layerTedi.addData(data);
+	layerTediGroup.addLayer(layerTedi);
 });
 
 var layerAction = L.geoJson(null, {
@@ -113,6 +134,7 @@ var layerAction = L.geoJson(null, {
 });
 $.getJSON("data/action.geojson", function (data) {
 	layerAction.addData(data);
+	layerActionGroup.addLayer(layerAction);
 });
 
 
@@ -125,10 +147,10 @@ var baseLayers = {
 };
 
 var overlayMaps = {
-	"KiK": layerKik,
-	"MacGeiz": layerMacgeiz,
-	"Tedi": layerTedi,
-	"Action": layerAction
+	"KiK": layerKikGroup,
+	"MacGeiz": layerMacgeizGroup,
+	"Tedi": layerTediGroup,
+	"Action": layerActionGroup
 };
 
 
@@ -138,7 +160,7 @@ L.control.layers(baseLayers, overlayMaps, {
 
 layerGoogleRoadsCustom.addTo(map);
 
-layerKik.addTo(map);
-layerMacgeiz.addTo(map);
-layerTedi.addTo(map);
-layerAction.addTo(map);
+layerKikGroup.addTo(map);
+layerMacgeizGroup.addTo(map);
+layerTediGroup.addTo(map);
+layerActionGroup.addTo(map);
