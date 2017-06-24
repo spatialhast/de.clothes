@@ -73,8 +73,8 @@ var layerKiK = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/kik.png',
-				iconSize: [32, 32],
-				iconAnchor: [16, 16]
+				iconSize: [16, 16],
+				iconAnchor: [8, 8]
 			}),
 			riseOnHover: true
 		});
@@ -91,8 +91,8 @@ var layerAction = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/action.png',
-				iconSize: [72, 32],
-				iconAnchor: [36, 16]
+				iconSize: [75, 16],
+				iconAnchor: [36, 8]
 			}),
 			riseOnHover: true
 		});
@@ -109,8 +109,8 @@ var layerMacgeiz = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/macgeiz.png',
-				iconSize: [95, 32],
-				iconAnchor: [48, 16]
+				iconSize: [48, 16],
+				iconAnchor: [24, 8]
 			}),
 			riseOnHover: true
 		});
@@ -127,8 +127,8 @@ var layerTedi = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/tedi.png',
-				iconSize: [32, 32],
-				iconAnchor: [16, 16]
+				iconSize: [20, 20],
+				iconAnchor: [10, 10]
 			}),
 			riseOnHover: true
 		});
@@ -163,8 +163,8 @@ var layerEuroshop = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/euroshop.png',
-				iconSize: [110, 32],
-				iconAnchor: [55, 16]
+				iconSize: [55, 16],
+				iconAnchor: [27, 8]
 			}),
 			riseOnHover: true
 		});
@@ -181,8 +181,8 @@ var layerWoolworth = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/woolworth.png',
-				iconSize: [130, 16],
-				iconAnchor: [65, 8]
+				iconSize: [65, 8],
+				iconAnchor: [33, 4]
 			}),
 			riseOnHover: true
 		});
@@ -199,8 +199,8 @@ var layerZeeman = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/zeeman.png',
-				iconSize: [90, 16],
-				iconAnchor: [45, 8]
+				iconSize: [45, 8],
+				iconAnchor: [22, 4]
 			}),
 			riseOnHover: true
 		});
@@ -235,8 +235,8 @@ var layerNKD = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/nkd.png',
-				iconSize: [32, 32],
-				iconAnchor: [16, 16]
+				iconSize: [20, 20],
+				iconAnchor: [10, 10]
 			}),
 			riseOnHover: true
 		});
@@ -253,8 +253,8 @@ var layerAWG = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/awg.png',
-				iconSize: [44, 16],
-				iconAnchor: [22, 8]
+				iconSize: [24, 10],
+				iconAnchor: [12, 5]
 			}),
 			riseOnHover: true
 		});
