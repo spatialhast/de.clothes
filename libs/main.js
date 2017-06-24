@@ -1,6 +1,6 @@
 var map = L.map('map', {
 	center: [52.5157, 13.4142],
-	zoom: 10,
+	zoom: 12,
 	maxZoom: 20
 });
 
@@ -44,22 +44,39 @@ var layerGoogleRoadsCustom = L.gridLayer.googleMutant({
 	maxNativeZoom: 18
 });
 
+// -----------------------------------------------------------------------------------------------------------------
 
-var layerKik = L.geoJson(null, {
+var layerKiK = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
 			icon: L.icon({
-				iconUrl: 'data/kik.png',
+				iconUrl: 'icons/kik.png',
 				iconSize: [32, 32],
 				iconAnchor: [16, 16]
 			}),
-			title: feature.properties.filiale,
 			riseOnHover: true
 		});
 	}
 });
 $.getJSON("data/kik.geojson", function (data) {
-	layerKik.addData(data);
+	layerKiK.addData(data);
+});
+
+
+var layerAction = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/action.png',
+				iconSize: [72, 32],
+				iconAnchor: [36, 16]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/action.geojson", function (data) {
+	layerAction.addData(data);
 });
 
 
@@ -67,11 +84,10 @@ var layerMacgeiz = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
 			icon: L.icon({
-				iconUrl: 'data/macgeiz.png',
-				iconSize: [72, 32],
-				iconAnchor: [36, 16]
+				iconUrl: 'icons/macgeiz.png',
+				iconSize: [95, 32],
+				iconAnchor: [48, 16]
 			}),
-			title: feature.properties.filiale,
 			riseOnHover: true
 		});
 	}
@@ -85,11 +101,10 @@ var layerTedi = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
 			icon: L.icon({
-				iconUrl: 'data/tedi.png',
+				iconUrl: 'icons/tedi.png',
 				iconSize: [32, 32],
 				iconAnchor: [16, 16]
 			}),
-			title: feature.properties.filiale,
 			riseOnHover: true
 		});
 	}
@@ -98,22 +113,125 @@ $.getJSON("data/tedi.geojson", function (data) {
 	layerTedi.addData(data);
 });
 
-var layerAction = L.geoJson(null, {
+
+var layerBlackde = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
 			icon: L.icon({
-				iconUrl: 'data/action.png',
-				iconSize: [72, 32],
-				iconAnchor: [36, 16]
+				iconUrl: 'icons/blackde.png',
+				iconSize: [55, 16],
+				iconAnchor: [25, 8]
 			}),
-			title: feature.properties.filiale,
 			riseOnHover: true
 		});
 	}
 });
-$.getJSON("data/action.geojson", function (data) {
-	layerAction.addData(data);
+$.getJSON("data/blackde.geojson", function (data) {
+	layerBlackde.addData(data);
 });
+
+
+var layerEuroshop = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/euroshop.png',
+				iconSize: [110, 32],
+				iconAnchor: [55, 16]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/euroshop.geojson", function (data) {
+	layerEuroshop.addData(data);
+});
+
+
+var layerWoolworth = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/woolworth.png',
+				iconSize: [130, 16],
+				iconAnchor: [65, 8]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/woolworth.geojson", function (data) {
+	layerWoolworth.addData(data);
+});
+
+
+var layerZeeman = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/zeeman.png',
+				iconSize: [90, 16],
+				iconAnchor: [45, 8]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/zeeman.geojson", function (data) {
+	layerZeeman.addData(data);
+});
+
+
+var layerTakko = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/takko.png',
+				iconSize: [35, 16],
+				iconAnchor: [18, 8]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/takko.geojson", function (data) {
+	layerTakko.addData(data);
+});
+
+
+var layerNKD = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/nkd.png',
+				iconSize: [32, 32],
+				iconAnchor: [16, 16]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/nkd.geojson", function (data) {
+	layerNKD.addData(data);
+});
+
+
+var layerAWG = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/awg.png',
+				iconSize: [44, 16],
+				iconAnchor: [22, 8]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/awg.geojson", function (data) {
+	layerAWG.addData(data);
+});
+
 
 
 var baseLayers = {
@@ -125,10 +243,17 @@ var baseLayers = {
 };
 
 var overlayMaps = {
-	"KiK": layerKik,
+	"KiK": layerKiK,
+	"Action": layerAction,
 	"MacGeiz": layerMacgeiz,
 	"Tedi": layerTedi,
-	"Action": layerAction
+	"Black.de": layerBlackde,
+	"Euroshop": layerEuroshop,
+	"Woolworth": layerWoolworth,
+	"Zeeman": layerZeeman,
+	"Takko": layerTakko,
+	"NKD": layerNKD,
+	"AWG": layerAWG
 };
 
 
@@ -138,7 +263,14 @@ L.control.layers(baseLayers, overlayMaps, {
 
 layerGoogleRoadsCustom.addTo(map);
 
-layerKik.addTo(map);
+layerKiK.addTo(map);
+layerAction.addTo(map);
 layerMacgeiz.addTo(map);
 layerTedi.addTo(map);
-layerAction.addTo(map);
+layerBlackde.addTo(map);
+layerEuroshop.addTo(map);
+layerWoolworth.addTo(map);
+layerZeeman.addTo(map);
+layerTakko.addTo(map);
+layerNKD.addTo(map);
+layerAWG.addTo(map);

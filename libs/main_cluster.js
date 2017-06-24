@@ -1,6 +1,6 @@
 var map = L.map('map', {
 	center: [52.5157, 13.4142],
-	zoom: 10,
+	zoom: 12,
 	maxZoom: 20
 });
 
@@ -49,36 +49,58 @@ var mcgLayerSupportGroup = L.markerClusterGroup.layerSupport({
 		spiderfyOnMaxZoom: true,
 		showCoverageOnHover: false,
 		zoomToBoundsOnClick: true,
-		disableClusteringAtZoom: 17
+		disableClusteringAtZoom: 13
 	}),
-	layerKikGroup = L.layerGroup(),
+	layerKiKGroup = L.layerGroup(),
+	layerActionGroup = L.layerGroup(),
 	layerMacgeizGroup = L.layerGroup(),
 	layerTediGroup = L.layerGroup(),
-	layerActionGroup = L.layerGroup();
+	layerBlackdeGroup = L.layerGroup(),
+	layerEuroshopGroup = L.layerGroup(),
+	layerWoolworthGroup = L.layerGroup(),
+	layerZeemanGroup = L.layerGroup(),
+	layerTakkoGroup = L.layerGroup(),
+	layerNKDGroup = L.layerGroup(),
+	layerAWGGroup = L.layerGroup();
 
 mcgLayerSupportGroup.addTo(map);
-mcgLayerSupportGroup.checkIn([layerKikGroup, layerMacgeizGroup, layerTediGroup, layerActionGroup]);
+mcgLayerSupportGroup.checkIn([layerKiKGroup, layerActionGroup, layerMacgeizGroup, layerTediGroup, layerBlackdeGroup, layerEuroshopGroup, layerWoolworthGroup, layerZeemanGroup, layerTakkoGroup, layerNKDGroup, layerAWGGroup]);
 
+// -----------------------------------------------------------------------------------------------------------------
 
-
-
-
-var layerKik = L.geoJson(null, {
+var layerKiK = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
 			icon: L.icon({
-				iconUrl: 'data/kik.png',
+				iconUrl: 'icons/kik.png',
 				iconSize: [32, 32],
 				iconAnchor: [16, 16]
 			}),
-			title: feature.properties.filiale,
 			riseOnHover: true
 		});
 	}
 });
 $.getJSON("data/kik.geojson", function (data) {
-	layerKik.addData(data);
-	layerKikGroup.addLayer(layerKik);
+	layerKiK.addData(data);
+	layerKiKGroup.addLayer(layerKiK);
+});
+
+
+var layerAction = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/action.png',
+				iconSize: [72, 32],
+				iconAnchor: [36, 16]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/action.geojson", function (data) {
+	layerAction.addData(data);
+	layerActionGroup.addLayer(layerAction);
 });
 
 
@@ -86,11 +108,10 @@ var layerMacgeiz = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
 			icon: L.icon({
-				iconUrl: 'data/macgeiz.png',
-				iconSize: [72, 32],
-				iconAnchor: [36, 16]
+				iconUrl: 'icons/macgeiz.png',
+				iconSize: [95, 32],
+				iconAnchor: [48, 16]
 			}),
-			title: feature.properties.filiale,
 			riseOnHover: true
 		});
 	}
@@ -105,11 +126,10 @@ var layerTedi = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
 			icon: L.icon({
-				iconUrl: 'data/tedi.png',
+				iconUrl: 'icons/tedi.png',
 				iconSize: [32, 32],
 				iconAnchor: [16, 16]
 			}),
-			title: feature.properties.filiale,
 			riseOnHover: true
 		});
 	}
@@ -119,22 +139,130 @@ $.getJSON("data/tedi.geojson", function (data) {
 	layerTediGroup.addLayer(layerTedi);
 });
 
-var layerAction = L.geoJson(null, {
+
+var layerBlackde = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
 			icon: L.icon({
-				iconUrl: 'data/action.png',
-				iconSize: [72, 32],
-				iconAnchor: [36, 16]
+				iconUrl: 'icons/blackde.png',
+				iconSize: [55, 16],
+				iconAnchor: [25, 8]
 			}),
-			title: feature.properties.filiale,
 			riseOnHover: true
 		});
 	}
 });
-$.getJSON("data/action.geojson", function (data) {
-	layerAction.addData(data);
-	layerActionGroup.addLayer(layerAction);
+$.getJSON("data/blackde.geojson", function (data) {
+	layerBlackde.addData(data);
+	layerBlackdeGroup.addLayer(layerBlackde);
+});
+
+
+var layerEuroshop = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/euroshop.png',
+				iconSize: [110, 32],
+				iconAnchor: [55, 16]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/euroshop.geojson", function (data) {
+	layerEuroshop.addData(data);
+	layerEuroshopGroup.addLayer(layerEuroshop);
+});
+
+
+var layerWoolworth = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/woolworth.png',
+				iconSize: [130, 16],
+				iconAnchor: [65, 8]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/woolworth.geojson", function (data) {
+	layerWoolworth.addData(data);
+	layerWoolworthGroup.addLayer(layerWoolworth);
+});
+
+
+var layerZeeman = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/zeeman.png',
+				iconSize: [90, 16],
+				iconAnchor: [45, 8]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/zeeman.geojson", function (data) {
+	layerZeeman.addData(data);
+	layerZeemanGroup.addLayer(layerZeeman);
+});
+
+
+var layerTakko = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/takko.png',
+				iconSize: [35, 16],
+				iconAnchor: [18, 8]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/takko.geojson", function (data) {
+	layerTakko.addData(data);
+	layerTakkoGroup.addLayer(layerTakko);
+});
+
+
+var layerNKD = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/nkd.png',
+				iconSize: [32, 32],
+				iconAnchor: [16, 16]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/nkd.geojson", function (data) {
+	layerNKD.addData(data);
+	layerNKDGroup.addLayer(layerNKD);
+});
+
+
+var layerAWG = L.geoJson(null, {
+	pointToLayer: function (feature, latlng) {
+		return L.marker(latlng, {
+			icon: L.icon({
+				iconUrl: 'icons/awg.png',
+				iconSize: [44, 16],
+				iconAnchor: [22, 8]
+			}),
+			riseOnHover: true
+		});
+	}
+});
+$.getJSON("data/awg.geojson", function (data) {
+	layerAWG.addData(data);
+	layerAWGGroup.addLayer(layerAWG);
 });
 
 
@@ -147,10 +275,17 @@ var baseLayers = {
 };
 
 var overlayMaps = {
-	"KiK": layerKikGroup,
-	"MacGeiz": layerMacgeizGroup,
-	"Tedi": layerTediGroup,
-	"Action": layerActionGroup
+	"KiK": layerKiK,
+	"Action": layerAction,
+	"MacGeiz": layerMacgeiz,
+	"Tedi": layerTedi,
+	"Black.de": layerBlackde,
+	"Euroshop": layerEuroshop,
+	"Woolworth": layerWoolworth,
+	"Zeeman": layerZeeman,
+	"Takko": layerTakko,
+	"NKD": layerNKD,
+	"AWG": layerAWG
 };
 
 
@@ -160,7 +295,14 @@ L.control.layers(baseLayers, overlayMaps, {
 
 layerGoogleRoadsCustom.addTo(map);
 
-layerKikGroup.addTo(map);
+layerKiKGroup.addTo(map);
+layerActionGroup.addTo(map);
 layerMacgeizGroup.addTo(map);
 layerTediGroup.addTo(map);
-layerActionGroup.addTo(map);
+layerBlackdeGroup.addTo(map);
+layerEuroshopGroup.addTo(map);
+layerWoolworthGroup.addTo(map);
+layerZeemanGroup.addTo(map);
+layerTakkoGroup.addTo(map);
+layerNKDGroup.addTo(map);
+layerAWGGroup.addTo(map);
