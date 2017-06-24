@@ -1,8 +1,13 @@
 var map = L.map('map', {
 	center: [52.5157, 13.4142],
 	zoom: 12,
-	maxZoom: 20
+	maxZoom: 20,
+	zoomControl: false
 });
+
+var zoomControl = L.control.zoom({
+	position: "bottomright"
+}).addTo(map);
 
 var hash = new L.Hash(map);
 
@@ -44,6 +49,15 @@ var layerGoogleRoadsCustom = L.gridLayer.googleMutant({
 	maxNativeZoom: 18
 });
 
+var layerEmpty = L.tileLayer('', {
+	maxZoom: 20
+});
+
+
+var iconSize = [16, 16];
+var iconAnchor = [8, 8];
+
+
 // -----------------------------------------------------------------------------------------------------------------
 
 var layerKiK = L.geoJson(null, {
@@ -51,8 +65,8 @@ var layerKiK = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/kik.png',
-				iconSize: [16, 16],
-				iconAnchor: [8, 8]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -68,8 +82,8 @@ var layerAction = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/action.png',
-				iconSize: [16, 16],
-				iconAnchor: [8, 8]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -85,8 +99,8 @@ var layerMacgeiz = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/macgeiz.png',
-				iconSize: [16, 16],
-				iconAnchor: [8, 8]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -102,8 +116,8 @@ var layerTedi = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/tedi.png',
-				iconSize: [16, 16],
-				iconAnchor: [8, 8]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -119,8 +133,8 @@ var layerBlackde = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/blackde.png',
-				iconSize: [16, 16],
-				iconAnchor: [8, 8]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -136,8 +150,8 @@ var layerEuroshop = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/euroshop.png',
-				iconSize: [18, 18],
-				iconAnchor: [9, 9]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -153,8 +167,8 @@ var layerWoolworth = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/woolworth.png',
-				iconSize: [16, 16],
-				iconAnchor: [8, 8]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -170,8 +184,8 @@ var layerZeeman = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/zeeman.png',
-				iconSize: [16, 16],
-				iconAnchor: [8, 8]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -187,8 +201,8 @@ var layerTakko = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/takko.png',
-				iconSize: [16, 16],
-				iconAnchor: [8, 8]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -204,8 +218,8 @@ var layerNKD = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/nkd.png',
-				iconSize: [18, 18],
-				iconAnchor: [9, 9]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -221,8 +235,8 @@ var layerAWG = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/awg.png',
-				iconSize: [30, 14],
-				iconAnchor: [15, 7]
+				iconSize: iconSize,
+				iconAnchor: iconAnchor
 			}),
 			riseOnHover: true
 		});
@@ -239,7 +253,8 @@ var baseLayers = {
 	"Google Roads": layerGoogleRoads,
 	"OpenStreetMap": layerOSM,
 	"MapSurfer": layerMapSurfer,
-	"Mapbox Imagery": layerMapboxImagery
+	"Mapbox Imagery": layerMapboxImagery,
+	"Empty layer": layerEmpty
 };
 
 var overlayMaps = {
@@ -253,7 +268,7 @@ var overlayMaps = {
 	"<img src='icons/zeeman.png' style='height: 16px'> Zeeman": layerZeeman,
 	"<img src='icons/takko.png' style='height: 16px'> Takko": layerTakko,
 	"<img src='icons/nkd.png' style='height: 16px'> NKD": layerNKD,
-	"<img src='icons/awg.png' style='height: 14px'> AWG": layerAWG
+	"<img src='icons/awg.png' style='height: 16px'> AWG": layerAWG
 };
 
 
@@ -274,3 +289,38 @@ layerZeeman.addTo(map);
 layerTakko.addTo(map);
 layerNKD.addTo(map);
 layerAWG.addTo(map);
+
+
+// icon size control
+var size16 = true;
+var iconSizeControl = L.easyButton('<strong id="icon-size">16</strong>', function () {
+	if (size16) {
+		$(".leaflet-marker-icon").css('width', '32px');
+		$(".leaflet-marker-icon").css('height', '32px');
+		$(".leaflet-marker-icon").css('margin-left', '-16px');
+		$(".leaflet-marker-icon").css('margin-top', '-16px');
+		$('#icon-size').text('32');
+		size16 = false;
+	} else {
+		$(".leaflet-marker-icon").css('width', '16px');
+		$(".leaflet-marker-icon").css('height', '16px');
+		$(".leaflet-marker-icon").css('margin-left', '-8px');
+		$(".leaflet-marker-icon").css('margin-top', '-8px');
+		$('#icon-size').text('16');
+		size16 = true;
+	};
+}, 'Change icon size', {
+	position: 'bottomright'
+});
+iconSizeControl.addTo(map);
+
+// var panelControl = L.control({
+// 	position: 'topleft'
+// });
+
+// panelControl.onAdd = function (map) {
+// 	var div = L.DomUtil.create('div', 'info legend');
+// 	div.innerHTML = '<label><input type="radio" name="r16" value="16"/>16</label><label><input type="radio" name="r32" value="32"/>32</label>';
+// 	return div;
+// };
+// panelControl.addTo(map);
