@@ -91,8 +91,8 @@ var layerAction = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/action.png',
-				iconSize: [75, 16],
-				iconAnchor: [36, 8]
+				iconSize: [16, 16],
+				iconAnchor: [8, 8]
 			}),
 			riseOnHover: true
 		});
@@ -109,8 +109,8 @@ var layerMacgeiz = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/macgeiz.png',
-				iconSize: [48, 16],
-				iconAnchor: [24, 8]
+				iconSize: [16, 16],
+				iconAnchor: [8, 8]
 			}),
 			riseOnHover: true
 		});
@@ -127,8 +127,8 @@ var layerTedi = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/tedi.png',
-				iconSize: [20, 20],
-				iconAnchor: [10, 10]
+				iconSize: [16, 16],
+				iconAnchor: [8, 8]
 			}),
 			riseOnHover: true
 		});
@@ -145,8 +145,8 @@ var layerBlackde = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/blackde.png',
-				iconSize: [55, 16],
-				iconAnchor: [25, 8]
+				iconSize: [16, 16],
+				iconAnchor: [8, 8]
 			}),
 			riseOnHover: true
 		});
@@ -163,8 +163,8 @@ var layerEuroshop = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/euroshop.png',
-				iconSize: [55, 16],
-				iconAnchor: [27, 8]
+				iconSize: [18, 18],
+				iconAnchor: [9, 9]
 			}),
 			riseOnHover: true
 		});
@@ -181,8 +181,8 @@ var layerWoolworth = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/woolworth.png',
-				iconSize: [65, 8],
-				iconAnchor: [33, 4]
+				iconSize: [16, 16],
+				iconAnchor: [8, 8]
 			}),
 			riseOnHover: true
 		});
@@ -199,8 +199,8 @@ var layerZeeman = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/zeeman.png',
-				iconSize: [45, 8],
-				iconAnchor: [22, 4]
+				iconSize: [16, 16],
+				iconAnchor: [8, 8]
 			}),
 			riseOnHover: true
 		});
@@ -217,8 +217,8 @@ var layerTakko = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/takko.png',
-				iconSize: [35, 16],
-				iconAnchor: [18, 8]
+				iconSize: [16, 16],
+				iconAnchor: [8, 8]
 			}),
 			riseOnHover: true
 		});
@@ -235,8 +235,8 @@ var layerNKD = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/nkd.png',
-				iconSize: [20, 20],
-				iconAnchor: [10, 10]
+				iconSize: [18, 18],
+				iconAnchor: [9, 9]
 			}),
 			riseOnHover: true
 		});
@@ -253,8 +253,8 @@ var layerAWG = L.geoJson(null, {
 		return L.marker(latlng, {
 			icon: L.icon({
 				iconUrl: 'icons/awg.png',
-				iconSize: [24, 10],
-				iconAnchor: [12, 5]
+				iconSize: [30, 14],
+				iconAnchor: [15, 7]
 			}),
 			riseOnHover: true
 		});
@@ -275,17 +275,17 @@ var baseLayers = {
 };
 
 var overlayMaps = {
-	"KiK": layerKiK,
-	"Action": layerAction,
-	"MacGeiz": layerMacgeiz,
-	"Tedi": layerTedi,
-	"Black.de": layerBlackde,
-	"Euroshop": layerEuroshop,
-	"Woolworth": layerWoolworth,
-	"Zeeman": layerZeeman,
-	"Takko": layerTakko,
-	"NKD": layerNKD,
-	"AWG": layerAWG
+	"<img src='icons/kik.png' style='height: 16px'>  KiK": layerKiK,
+	"<img src='icons/action.png' style='height: 16px'>  Action": layerAction,
+	"<img src='icons/macgeiz.png' style='height: 16px'> MacGeiz": layerMacgeiz,
+	"<img src='icons/tedi.png' style='height: 16px'> Tedi": layerTedi,
+	"<img src='icons/blackde.png' style='height: 16px'> Black.de": layerBlackde,
+	"<img src='icons/euroshop.png' style='height: 16px'> Euroshop": layerEuroshop,
+	"<img src='icons/woolworth.png' style='height: 16px'> Woolworth": layerWoolworth,
+	"<img src='icons/zeeman.png' style='height: 16px'> Zeeman": layerZeeman,
+	"<img src='icons/takko.png' style='height: 16px'> Takko": layerTakko,
+	"<img src='icons/nkd.png' style='height: 16px'> NKD": layerNKD,
+	"<img src='icons/awg.png' style='height: 14px'> AWG": layerAWG
 };
 
 
