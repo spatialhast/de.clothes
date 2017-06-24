@@ -263,14 +263,14 @@ L.control.layers(baseLayers, overlayMaps, {
 
 layerGoogleRoadsCustom.addTo(map);
 
-// layerKiK.addTo(map);
-// layerAction.addTo(map);
-// layerMacgeiz.addTo(map);
-// layerTedi.addTo(map);
-// layerBlackde.addTo(map);
-// layerEuroshop.addTo(map);
-// layerWoolworth.addTo(map);
-// layerZeeman.addTo(map);
-// layerTakko.addTo(map);
-// layerNKD.addTo(map);
-// layerAWG.addTo(map);
+layerKiK.addTo(map);
+layerAction.addTo(map);
+layerMacgeiz.addTo(map);
+layerTedi.addTo(map);
+layerBlackde.addTo(map);
+layerEuroshop.addTo(map);
+layerWoolworth.addTo(map);
+layerZeeman.addTo(map);
+layerTakko.addTo(map);
+layerNKD.addTo(map);
+layerAWG.addTo(map);
