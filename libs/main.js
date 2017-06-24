@@ -54,9 +54,36 @@ var layerEmpty = L.tileLayer('', {
 });
 
 
+
+// -----------------------------------------------------------------------------------------------------------------
+
+
+var mcgLayerSupportGroup = L.markerClusterGroup.layerSupport({
+		spiderfyOnMaxZoom: true,
+		showCoverageOnHover: false,
+		zoomToBoundsOnClick: true,
+		disableClusteringAtZoom: 14
+	}),
+	layerKiKGroup = L.layerGroup(),
+	layerActionGroup = L.layerGroup(),
+	layerMacgeizGroup = L.layerGroup(),
+	layerTediGroup = L.layerGroup(),
+	layerBlackdeGroup = L.layerGroup(),
+	layerEuroshopGroup = L.layerGroup(),
+	layerWoolworthGroup = L.layerGroup(),
+	layerZeemanGroup = L.layerGroup(),
+	layerTakkoGroup = L.layerGroup(),
+	layerNKDGroup = L.layerGroup(),
+	layerAWGGroup = L.layerGroup();
+
+mcgLayerSupportGroup.addTo(map);
+mcgLayerSupportGroup.checkIn([layerKiKGroup, layerActionGroup, layerMacgeizGroup, layerTediGroup, layerBlackdeGroup, layerEuroshopGroup, layerWoolworthGroup, layerZeemanGroup, layerTakkoGroup, layerNKDGroup, layerAWGGroup]);
+
+
+
+
 var iconSize = [16, 16];
 var iconAnchor = [8, 8];
-
 
 // -----------------------------------------------------------------------------------------------------------------
 
@@ -74,6 +101,7 @@ var layerKiK = L.geoJson(null, {
 });
 $.getJSON("data/kik.geojson", function (data) {
 	layerKiK.addData(data);
+	layerKiKGroup.addLayer(layerKiK);
 });
 
 
@@ -91,6 +119,7 @@ var layerAction = L.geoJson(null, {
 });
 $.getJSON("data/action.geojson", function (data) {
 	layerAction.addData(data);
+	layerActionGroup.addLayer(layerAction);
 });
 
 
@@ -108,6 +137,7 @@ var layerMacgeiz = L.geoJson(null, {
 });
 $.getJSON("data/macgeiz.geojson", function (data) {
 	layerMacgeiz.addData(data);
+	layerMacgeizGroup.addLayer(layerMacgeiz);
 });
 
 
@@ -125,6 +155,7 @@ var layerTedi = L.geoJson(null, {
 });
 $.getJSON("data/tedi.geojson", function (data) {
 	layerTedi.addData(data);
+	layerTediGroup.addLayer(layerTedi);
 });
 
 
@@ -142,6 +173,7 @@ var layerBlackde = L.geoJson(null, {
 });
 $.getJSON("data/blackde.geojson", function (data) {
 	layerBlackde.addData(data);
+	layerBlackdeGroup.addLayer(layerBlackde);
 });
 
 
@@ -159,6 +191,7 @@ var layerEuroshop = L.geoJson(null, {
 });
 $.getJSON("data/euroshop.geojson", function (data) {
 	layerEuroshop.addData(data);
+	layerEuroshopGroup.addLayer(layerEuroshop);
 });
 
 
@@ -176,6 +209,7 @@ var layerWoolworth = L.geoJson(null, {
 });
 $.getJSON("data/woolworth.geojson", function (data) {
 	layerWoolworth.addData(data);
+	layerWoolworthGroup.addLayer(layerWoolworth);
 });
 
 
@@ -193,6 +227,7 @@ var layerZeeman = L.geoJson(null, {
 });
 $.getJSON("data/zeeman.geojson", function (data) {
 	layerZeeman.addData(data);
+	layerZeemanGroup.addLayer(layerZeeman);
 });
 
 
@@ -210,6 +245,7 @@ var layerTakko = L.geoJson(null, {
 });
 $.getJSON("data/takko.geojson", function (data) {
 	layerTakko.addData(data);
+	layerTakkoGroup.addLayer(layerTakko);
 });
 
 
@@ -227,6 +263,7 @@ var layerNKD = L.geoJson(null, {
 });
 $.getJSON("data/nkd.geojson", function (data) {
 	layerNKD.addData(data);
+	layerNKDGroup.addLayer(layerNKD);
 });
 
 
@@ -244,6 +281,7 @@ var layerAWG = L.geoJson(null, {
 });
 $.getJSON("data/awg.geojson", function (data) {
 	layerAWG.addData(data);
+	layerAWGGroup.addLayer(layerAWG);
 });
 
 
@@ -257,70 +295,112 @@ var baseLayers = {
 	"Empty layer": layerEmpty
 };
 
+
 var overlayMaps = {
-	"<img src='icons/kik.png' style='height: 16px'>  KiK": layerKiK,
-	"<img src='icons/action.png' style='height: 16px'>  Action": layerAction,
-	"<img src='icons/macgeiz.png' style='height: 16px'> MacGeiz": layerMacgeiz,
-	"<img src='icons/tedi.png' style='height: 16px'> Tedi": layerTedi,
-	"<img src='icons/blackde.png' style='height: 16px'> Black.de": layerBlackde,
-	"<img src='icons/euroshop.png' style='height: 16px'> Euroshop": layerEuroshop,
-	"<img src='icons/woolworth.png' style='height: 16px'> Woolworth": layerWoolworth,
-	"<img src='icons/zeeman.png' style='height: 16px'> Zeeman": layerZeeman,
-	"<img src='icons/takko.png' style='height: 16px'> Takko": layerTakko,
-	"<img src='icons/nkd.png' style='height: 16px'> NKD": layerNKD,
-	"<img src='icons/awg.png' style='height: 16px'> AWG": layerAWG
+	"On/off all layers": {
+		"<img src='icons/kik.png' style='height: 16px'>  KiK": layerKiK,
+		"<img src='icons/action.png' style='height: 16px'>  Action": layerAction,
+		"<img src='icons/macgeiz.png' style='height: 16px'> MacGeiz": layerMacgeiz,
+		"<img src='icons/tedi.png' style='height: 16px'> Tedi": layerTedi,
+		"<img src='icons/blackde.png' style='height: 16px'> Black.de": layerBlackde,
+		"<img src='icons/euroshop.png' style='height: 16px'> Euroshop": layerEuroshop,
+		"<img src='icons/woolworth.png' style='height: 16px'> Woolworth": layerWoolworth,
+		"<img src='icons/zeeman.png' style='height: 16px'> Zeeman": layerZeeman,
+		"<img src='icons/takko.png' style='height: 16px'> Takko": layerTakko,
+		"<img src='icons/nkd.png' style='height: 16px'> NKD": layerNKD,
+		"<img src='icons/awg.png' style='height: 16px'> AWG": layerAWG
+	}
 };
 
 
-L.control.layers(baseLayers, overlayMaps, {
-	collapsed: false
+L.control.groupedLayers(baseLayers, overlayMaps, {
+	collapsed: false,
+	groupCheckboxes: true
 }).addTo(map);
+
+
+map.on("overlayremove", function (e) {
+	if (!map.hasLayer(layerKiK) && !map.hasLayer(layerAction) && !map.hasLayer(layerMacgeiz) && !map.hasLayer(layerTedi) &&
+		!map.hasLayer(layerBlackde) && !map.hasLayer(layerEuroshop) && !map.hasLayer(layerWoolworth) && !map.hasLayer(layerZeeman) &&
+		!map.hasLayer(layerTakko) && !map.hasLayer(layerNKD) && !map.hasLayer(layerAWG)) {
+		$(".leaflet-control-layers-group-selector").prop("checked", false);
+	};
+});
 
 layerGoogleRoadsCustom.addTo(map);
 
-layerKiK.addTo(map);
-layerAction.addTo(map);
-layerMacgeiz.addTo(map);
-layerTedi.addTo(map);
-layerBlackde.addTo(map);
-layerEuroshop.addTo(map);
-layerWoolworth.addTo(map);
-layerZeeman.addTo(map);
-layerTakko.addTo(map);
-layerNKD.addTo(map);
-layerAWG.addTo(map);
+layerKiKGroup.addTo(map);
+layerActionGroup.addTo(map);
+layerMacgeizGroup.addTo(map);
+layerTediGroup.addTo(map);
+layerBlackdeGroup.addTo(map);
+layerEuroshopGroup.addTo(map);
+layerWoolworthGroup.addTo(map);
+layerZeemanGroup.addTo(map);
+layerTakkoGroup.addTo(map);
+layerNKDGroup.addTo(map);
+layerAWGGroup.addTo(map);
+
+
+setTimeout(function () {
+	$(".leaflet-control-layers-group-selector").prop("checked", true);
+}, 500);
+
+
+map.on("overlayadd overlayremove moveend zoomend", function (e) {
+	iconSizeUpdate(size16);
+});
 
 
 // icon size control
 var size16 = true;
-var iconSizeControl = L.easyButton('<strong id="icon-size">16</strong>', function () {
+var iconSizeControl = L.easyButton('<strong id="icon-size-element">32</strong>', function () {
 	if (size16) {
-		$(".leaflet-marker-icon").css('width', '32px');
-		$(".leaflet-marker-icon").css('height', '32px');
-		$(".leaflet-marker-icon").css('margin-left', '-16px');
-		$(".leaflet-marker-icon").css('margin-top', '-16px');
-		$('#icon-size').text('32');
+		$('#icon-size-element').text('16');
 		size16 = false;
 	} else {
-		$(".leaflet-marker-icon").css('width', '16px');
-		$(".leaflet-marker-icon").css('height', '16px');
-		$(".leaflet-marker-icon").css('margin-left', '-8px');
-		$(".leaflet-marker-icon").css('margin-top', '-8px');
-		$('#icon-size').text('16');
+		$('#icon-size-element').text('32');
 		size16 = true;
 	};
+	iconSizeUpdate(size16);
 }, 'Change icon size', {
 	position: 'bottomright'
 });
 iconSizeControl.addTo(map);
 
-// var panelControl = L.control({
-// 	position: 'topleft'
-// });
 
-// panelControl.onAdd = function (map) {
-// 	var div = L.DomUtil.create('div', 'info legend');
-// 	div.innerHTML = '<label><input type="radio" name="r16" value="16"/>16</label><label><input type="radio" name="r32" value="32"/>32</label>';
-// 	return div;
-// };
-// panelControl.addTo(map);
+function iconSizeUpdate(size) {
+	if (!size) {
+		$(".leaflet-marker-icon").css('width', '32px');
+		$(".leaflet-marker-icon").css('height', '32px');
+		$(".leaflet-marker-icon").css('margin-left', '-16px');
+		$(".leaflet-marker-icon").css('margin-top', '-16px');
+	} else {
+		$(".leaflet-marker-icon").css('width', '16px');
+		$(".leaflet-marker-icon").css('height', '16px');
+		$(".leaflet-marker-icon").css('margin-left', '-8px');
+		$(".leaflet-marker-icon").css('margin-top', '-8px');
+	};
+};
+
+// cluster status control
+var clusterStatus = true;
+var iconClusterControl = L.easyButton('<strong id="cluster-status-element">D</strong>', function () {
+	if (clusterStatus) {
+
+		mcgLayerSupportGroup.disableClustering();
+
+		$('#cluster-status-element').text('E');
+		clusterStatus = false;
+	} else {
+
+		mcgLayerSupportGroup.enableClustering();
+
+		$('#cluster-status-element').text('D');
+		clusterStatus = true;
+	};
+	iconSizeUpdate(size16);
+}, 'Disable/enable POI clustering', {
+	position: 'bottomright'
+});
+iconClusterControl.addTo(map);
