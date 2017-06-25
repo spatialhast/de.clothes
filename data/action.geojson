@@ -7,8 +7,7 @@
 { "type": "Feature", "properties": { "filiale": 589819, "address": "Potsdamer Straße 54j, 14974 Ludwigsfelde" }, "geometry": { "type": "Point", "coordinates": [ 13.25681, 52.30307 ] } },
 { "type": "Feature", "properties": { "filiale": 589747, "address": "Nennhauser Damm 170, 13591 Berlin" }, "geometry": { "type": "Point", "coordinates": [ 13.12733, 52.52896 ] } },
 { "type": "Feature", "properties": { "filiale": 588262, "address": "Wittenberger Straße 80, 12689 Berlin" }, "geometry": { "type": "Point", "coordinates": [ 13.5714413, 52.5654293 ] } },
-{ "type": "Feature", "properties": { "filiale": 584867, "address": "Hauptstraße 9-9d, 13055 Berlin" }, "geometry": { "type": "Point", "coordinates": [ 13.3668564, 52.5852159 ] } },
-{ "type": "Feature", "properties": { "filiale": 0, "address": "Hauptstraße 9-9d, 13055 Berlin" }, "geometry": { "type": "Point", "coordinates": [ 13.5033525, 52.5479277 ] } }
+{ "type": "Feature", "properties": { "filiale": 584867, "address": "Hauptstraße 9-9d, 13055 Berlin" }, "geometry": { "type": "Point", "coordinates": [ 13.5033525, 52.5479277 ] } }
 ]
 }
 
