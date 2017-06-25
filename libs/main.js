@@ -422,15 +422,15 @@ iconSizeControl.addTo(map);
 
 function iconSizeUpdate(size) {
 	if (!size) {
-		$(".leaflet-marker-icon").css('width', '32px');
-		$(".leaflet-marker-icon").css('height', '32px');
-		$(".leaflet-marker-icon").css('margin-left', '-16px');
-		$(".leaflet-marker-icon").css('margin-top', '-16px');
+		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('width', '32px');
+		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('height', '32px');
+		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-left', '-16px');
+		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-top', '-16px');
 	} else {
-		$(".leaflet-marker-icon").css('width', '16px');
-		$(".leaflet-marker-icon").css('height', '16px');
-		$(".leaflet-marker-icon").css('margin-left', '-8px');
-		$(".leaflet-marker-icon").css('margin-top', '-8px');
+		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('width', '16px');
+		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('height', '16px');
+		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-left', '-8px');
+		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-top', '-8px');
 	};
 };
 
@@ -455,6 +455,9 @@ var iconClusterControl = L.easyButton('<strong id="cluster-status-element">D</st
 	position: 'bottomright'
 });
 iconClusterControl.addTo(map);
+
+
+map.setZoom(map.getZoom() - 1);
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // feature count
