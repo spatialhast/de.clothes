@@ -400,6 +400,7 @@ setTimeout(function () {
 
 map.on("overlayadd overlayremove moveend zoomend", function (e) {
 	iconSizeUpdate(size16);
+	getFeatureCount();
 });
 
 
@@ -422,15 +423,15 @@ iconSizeControl.addTo(map);
 
 function iconSizeUpdate(size) {
 	if (!size) {
-		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('width', '32px');
-		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('height', '32px');
-		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-left', '-16px');
-		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-top', '-16px');
+		$("img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('width', '32px');
+		$("img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('height', '32px');
+		$("img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-left', '-16px');
+		$("img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-top', '-16px');
 	} else {
-		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('width', '16px');
-		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('height', '16px');
-		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-left', '-8px');
-		$("img .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-top', '-8px');
+		$("img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('width', '16px');
+		$("img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('height', '16px');
+		$("img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-left', '-8px');
+		$("img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive").css('margin-top', '-8px');
 	};
 };
 
@@ -456,12 +457,11 @@ var iconClusterControl = L.easyButton('<strong id="cluster-status-element">D</st
 });
 iconClusterControl.addTo(map);
 
-
 map.setZoom(map.getZoom() - 1);
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// feature count
-map.on("moveend zoomend", function (e) {
+
+function getFeatureCount() {
 
 	var total_kik = featureCount["layerKiK"][0];
 	var total_action = featureCount["layerAction"][0];
@@ -476,18 +476,174 @@ map.on("moveend zoomend", function (e) {
 	var total_awg = featureCount["layerAWG"][0];
 	var total_count = total_kik + total_action + total_macgeiz + total_tedi + total_blackde + total_euroshop + total_woolworth + total_zeeman + total_takko + total_nkd + total_awg;
 
-	$('#counter_kik').text('(' + total_kik + ')');
-	$('#counter_action').text('(' + total_action + ')');
-	$('#counter_macgeiz').text('(' + total_macgeiz + ')');
-	$('#counter_tedi').text('(' + total_tedi + ')');
-	$('#counter_blackde').text('(' + total_blackde + ')');
-	$('#counter_euroshop').text('(' + total_euroshop + ')');
-	$('#counter_woolworth').text('(' + total_woolworth + ')');
-	$('#counter_zeeman').text('(' + total_zeeman + ')');
-	$('#counter_takko').text('(' + total_takko + ')');
-	$('#counter_nkd').text('(' + total_nkd + ')');
-	$('#counter_awg').text('(' + total_awg + ')');
+	if (map.hasLayer(layerKiK)) {
+		layerKiKGroup.eachLayer(function (e) {
+			featureCount["layerKiK"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerKiK"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerKiK"][1] = 0;
+	};
 
-	$('#counter_total').text('(' + total_count + ')');
+	if (map.hasLayer(layerAction)) {
+		layerActionGroup.eachLayer(function (e) {
+			featureCount["layerAction"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerAction"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerAction"][1] = 0;
+	};
 
-});
+	if (map.hasLayer(layerMacgeiz)) {
+		layerMacgeizGroup.eachLayer(function (e) {
+			featureCount["layerMacgeiz"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerMacgeiz"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerMacgeiz"][1] = 0;
+	};
+
+	if (map.hasLayer(layerTedi)) {
+		layerTediGroup.eachLayer(function (e) {
+			featureCount["layerTedi"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerTedi"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerTedi"][1] = 0;
+	};
+
+	if (map.hasLayer(layerBlackde)) {
+		layerBlackdeGroup.eachLayer(function (e) {
+			featureCount["layerBlackde"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerBlackde"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerBlackde"][1] = 0;
+	};
+
+	if (map.hasLayer(layerEuroshop)) {
+		layerEuroshopGroup.eachLayer(function (e) {
+			featureCount["layerEuroshop"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerEuroshop"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerEuroshop"][1] = 0;
+	};
+
+	if (map.hasLayer(layerWoolworth)) {
+		layerWoolworthGroup.eachLayer(function (e) {
+			featureCount["layerWoolworth"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerWoolworth"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerWoolworth"][1] = 0;
+	};
+
+	if (map.hasLayer(layerZeeman)) {
+		layerZeemanGroup.eachLayer(function (e) {
+			featureCount["layerZeeman"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerZeeman"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerZeeman"][1] = 0;
+	};
+
+	if (map.hasLayer(layerTakko)) {
+		layerTakkoGroup.eachLayer(function (e) {
+			featureCount["layerTakko"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerTakko"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerTakko"][1] = 0;
+	};
+
+	if (map.hasLayer(layerNKD)) {
+		layerNKDGroup.eachLayer(function (e) {
+			featureCount["layerNKD"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerNKD"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerNKD"][1] = 0;
+	};
+
+	if (map.hasLayer(layerAWG)) {
+		layerAWGGroup.eachLayer(function (e) {
+			featureCount["layerAWG"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerAWG"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerAWG"][1] = 0;
+	};
+
+	var view_kik = featureCount["layerKiK"][1];
+	var view_action = featureCount["layerAction"][1];
+	var view_macgeiz = featureCount["layerMacgeiz"][1];
+	var view_tedi = featureCount["layerTedi"][1];
+	var view_blackde = featureCount["layerBlackde"][1];
+	var view_euroshop = featureCount["layerEuroshop"][1];
+	var view_woolworth = featureCount["layerWoolworth"][1];
+	var view_zeeman = featureCount["layerZeeman"][1];
+	var view_takko = featureCount["layerTakko"][1];
+	var view_nkd = featureCount["layerNKD"][1];
+	var view_awg = featureCount["layerAWG"][1];
+	var view_count = view_kik + view_action + view_macgeiz + view_tedi + view_blackde + view_euroshop + view_woolworth + view_zeeman + view_takko + view_nkd + view_awg;
+
+	$('#counter_kik').text('(' + view_kik + '/' + total_kik + ')');
+	$('#counter_action').text('(' + view_action + '/' + total_action + ')');
+	$('#counter_macgeiz').text('(' + view_macgeiz + '/' + total_macgeiz + ')');
+	$('#counter_tedi').text('(' + view_tedi + '/' + total_tedi + ')');
+	$('#counter_blackde').text('(' + view_blackde + '/' + total_blackde + ')');
+	$('#counter_euroshop').text('(' + view_euroshop + '/' + total_euroshop + ')');
+	$('#counter_woolworth').text('(' + view_woolworth + '/' + total_woolworth + ')');
+	$('#counter_zeeman').text('(' + view_zeeman + '/' + total_zeeman + ')');
+	$('#counter_takko').text('(' + view_takko + '/' + total_takko + ')');
+	$('#counter_nkd').text('(' + view_nkd + '/' + total_nkd + ')');
+	$('#counter_awg').text('(' + view_awg + '/' + total_awg + ')');
+
+	$('#counter_total').text('(' + view_count + '/' + total_count + ')');
+
+};
