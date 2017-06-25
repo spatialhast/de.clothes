@@ -87,6 +87,24 @@ var iconAnchor = [8, 8];
 
 // -----------------------------------------------------------------------------------------------------------------
 
+
+var featureCount = {
+	"layerKiK": [0, 0],
+	"layerAction": [0, 0],
+	"layerMacgeiz": [0, 0],
+	"layerTedi": [0, 0],
+	"layerBlackde": [0, 0],
+	"layerEuroshop": [0, 0],
+	"layerWoolworth": [0, 0],
+	"layerZeeman": [0, 0],
+	"layerTakko": [0, 0],
+	"layerNKD": [0, 0],
+	"layerAWG": [0, 0]
+};
+
+
+// -----------------------------------------------------------------------------------------------------------------
+
 var layerKiK = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
@@ -97,6 +115,9 @@ var layerKiK = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerKiK"][0]++;
 	}
 });
 $.getJSON("data/kik.geojson", function (data) {
@@ -115,6 +136,9 @@ var layerAction = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerAction"][0]++;
 	}
 });
 $.getJSON("data/action.geojson", function (data) {
@@ -133,6 +157,9 @@ var layerMacgeiz = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerMacgeiz"][0]++;
 	}
 });
 $.getJSON("data/macgeiz.geojson", function (data) {
@@ -151,6 +178,9 @@ var layerTedi = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerTedi"][0]++;
 	}
 });
 $.getJSON("data/tedi.geojson", function (data) {
@@ -169,6 +199,9 @@ var layerBlackde = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerBlackde"][0]++;
 	}
 });
 $.getJSON("data/blackde.geojson", function (data) {
@@ -187,6 +220,9 @@ var layerEuroshop = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerEuroshop"][0]++;
 	}
 });
 $.getJSON("data/euroshop.geojson", function (data) {
@@ -205,6 +241,9 @@ var layerWoolworth = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerWoolworth"][0]++;
 	}
 });
 $.getJSON("data/woolworth.geojson", function (data) {
@@ -223,6 +262,9 @@ var layerZeeman = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerZeeman"][0]++;
 	}
 });
 $.getJSON("data/zeeman.geojson", function (data) {
@@ -241,6 +283,9 @@ var layerTakko = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerTakko"][0]++;
 	}
 });
 $.getJSON("data/takko.geojson", function (data) {
@@ -259,6 +304,9 @@ var layerNKD = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerNKD"][0]++;
 	}
 });
 $.getJSON("data/nkd.geojson", function (data) {
@@ -277,6 +325,9 @@ var layerAWG = L.geoJson(null, {
 			}),
 			riseOnHover: true
 		});
+	},
+	onEachFeature: function onEachFeature(feature, layer) {
+		featureCount["layerAWG"][0]++;
 	}
 });
 $.getJSON("data/awg.geojson", function (data) {
@@ -297,18 +348,18 @@ var baseLayers = {
 
 
 var overlayMaps = {
-	"On/off all layers": {
-		"<img src='icons/kik.png' style='height: 16px'>  KiK": layerKiK,
-		"<img src='icons/action.png' style='height: 16px'>  Action": layerAction,
-		"<img src='icons/macgeiz.png' style='height: 16px'> MacGeiz": layerMacgeiz,
-		"<img src='icons/tedi.png' style='height: 16px'> Tedi": layerTedi,
-		"<img src='icons/blackde.png' style='height: 16px'> Black.de": layerBlackde,
-		"<img src='icons/euroshop.png' style='height: 16px'> Euroshop": layerEuroshop,
-		"<img src='icons/woolworth.png' style='height: 16px'> Woolworth": layerWoolworth,
-		"<img src='icons/zeeman.png' style='height: 16px'> Zeeman": layerZeeman,
-		"<img src='icons/takko.png' style='height: 16px'> Takko": layerTakko,
-		"<img src='icons/nkd.png' style='height: 16px'> NKD": layerNKD,
-		"<img src='icons/awg.png' style='height: 16px'> AWG": layerAWG
+	"On/off all layers <span id='counter_total'></span>": {
+		"<img src='icons/kik.png' style='height: 16px'>  KiK <span id='counter_kik'></span>": layerKiK,
+		"<img src='icons/action.png' style='height: 16px'>  Action <span id='counter_action'></span>": layerAction,
+		"<img src='icons/macgeiz.png' style='height: 16px'> MacGeiz <span id='counter_macgeiz'></span>": layerMacgeiz,
+		"<img src='icons/tedi.png' style='height: 16px'> Tedi <span id='counter_tedi'></span>": layerTedi,
+		"<img src='icons/blackde.png' style='height: 16px'> Black.de <span id='counter_blackde'></span>": layerBlackde,
+		"<img src='icons/euroshop.png' style='height: 16px'> Euroshop <span id='counter_euroshop'></span>": layerEuroshop,
+		"<img src='icons/woolworth.png' style='height: 16px'> Woolworth <span id='counter_woolworth'></span>": layerWoolworth,
+		"<img src='icons/zeeman.png' style='height: 16px'> Zeeman <span id='counter_zeeman'></span>": layerZeeman,
+		"<img src='icons/takko.png' style='height: 16px'> Takko <span id='counter_takko'></span>": layerTakko,
+		"<img src='icons/nkd.png' style='height: 16px'> NKD <span id='counter_nkd'></span>": layerNKD,
+		"<img src='icons/awg.png' style='height: 16px'> AWG <span id='counter_awg'></span>": layerAWG
 	}
 };
 
@@ -404,3 +455,36 @@ var iconClusterControl = L.easyButton('<strong id="cluster-status-element">D</st
 	position: 'bottomright'
 });
 iconClusterControl.addTo(map);
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// feature count
+map.on("moveend zoomend", function (e) {
+
+	var total_kik = featureCount["layerKiK"][0];
+	var total_action = featureCount["layerAction"][0];
+	var total_macgeiz = featureCount["layerMacgeiz"][0];
+	var total_tedi = featureCount["layerTedi"][0];
+	var total_blackde = featureCount["layerBlackde"][0];
+	var total_euroshop = featureCount["layerEuroshop"][0];
+	var total_woolworth = featureCount["layerWoolworth"][0];
+	var total_zeeman = featureCount["layerZeeman"][0];
+	var total_takko = featureCount["layerTakko"][0];
+	var total_nkd = featureCount["layerNKD"][0];
+	var total_awg = featureCount["layerAWG"][0];
+	var total_count = total_kik + total_action + total_macgeiz + total_tedi + total_blackde + total_euroshop + total_woolworth + total_zeeman + total_takko + total_nkd + total_awg;
+
+	$('#counter_kik').text('(' + total_kik + ')');
+	$('#counter_action').text('(' + total_action + ')');
+	$('#counter_macgeiz').text('(' + total_macgeiz + ')');
+	$('#counter_tedi').text('(' + total_tedi + ')');
+	$('#counter_blackde').text('(' + total_blackde + ')');
+	$('#counter_euroshop').text('(' + total_euroshop + ')');
+	$('#counter_woolworth').text('(' + total_woolworth + ')');
+	$('#counter_zeeman').text('(' + total_zeeman + ')');
+	$('#counter_takko').text('(' + total_takko + ')');
+	$('#counter_nkd').text('(' + total_nkd + ')');
+	$('#counter_awg').text('(' + total_awg + ')');
+
+	$('#counter_total').text('(' + total_count + ')');
+
+});
