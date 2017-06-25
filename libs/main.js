@@ -389,7 +389,7 @@ var iconClusterControl = L.easyButton('<strong id="cluster-status-element">D</st
 	if (clusterStatus) {
 
 		mcgLayerSupportGroup.disableClustering();
-
+		map.panTo(new L.LatLng(map.getCenter().lat, map.getCenter().lng + 0.000001));
 		$('#cluster-status-element').text('E');
 		clusterStatus = false;
 	} else {
