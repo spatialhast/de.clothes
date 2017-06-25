@@ -5,6 +5,8 @@ var map = L.map('map', {
 	zoomControl: false
 });
 
+map.doubleClickZoom.disable();
+
 var zoomControl = L.control.zoom({
 	position: "bottomright"
 }).addTo(map);
