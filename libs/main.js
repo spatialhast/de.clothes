@@ -74,21 +74,22 @@ var mcgLayerSupportGroup = L.markerClusterGroup.layerSupport({
 	layerZeemanGroup = L.layerGroup(),
 	layerTakkoGroup = L.layerGroup(),
 	layerNKDGroup = L.layerGroup(),
-	layerAWGGroup = L.layerGroup(),
-	layerKauflandGroup = L.layerGroup(),
+	layerAWGGroup = L.layerGroup()
+layerKauflandGroup = L.layerGroup(),
 	layerLidlGroup = L.layerGroup(),
 	layerAldiGroup = L.layerGroup(),
 	layerNormaGroup = L.layerGroup(),
 	layerPennyGroup = L.layerGroup(),
 	layerXenosGroup = L.layerGroup(),
-	layerTigerStoreGroup = L.layerGroup(),
-	layerDeutschePostGroup = L.layerGroup(),
-	layerMrsSportyGroup = L.layerGroup(),
-	layerMcFitGroup = L.layerGroup(),
-	layerIkeaGroup = L.layerGroup();
+	layerTigerStoreGroup = L.layerGroup();
+// layerDeutschePostGroup = L.layerGroup(),
+// layerMrsSportyGroup = L.layerGroup(),
+// layerMcFitGroup = L.layerGroup(),
+// layerIkeaGroup = L.layerGroup();
 
 mcgLayerSupportGroup.addTo(map);
-mcgLayerSupportGroup.checkIn([layerKiKGroup, layerActionGroup, layerMacgeizGroup, layerTediGroup, layerBlackdeGroup, layerEuroshopGroup, layerWoolworthGroup, layerZeemanGroup, layerTakkoGroup, layerNKDGroup, layerAWGGroup, layerKauflandGroup, layerLidlGroup, layerAldiGroup, layerNormaGroup, layerPennyGroup, layerXenosGroup, layerTigerStoreGroup, layerDeutschePostGroup, layerMrsSportyGroup, layerMcFitGroup, layerIkeaGroup]);
+//mcgLayerSupportGroup.checkIn([layerKiKGroup, layerActionGroup, layerMacgeizGroup, layerTediGroup, layerBlackdeGroup, layerEuroshopGroup, layerWoolworthGroup, layerZeemanGroup, layerTakkoGroup, layerNKDGroup, layerAWGGroup, layerKauflandGroup, layerLidlGroup, layerAldiGroup, layerNormaGroup, layerPennyGroup, layerXenosGroup, layerTigerStoreGroup, layerDeutschePostGroup, layerMrsSportyGroup, layerMcFitGroup, layerIkeaGroup]);
+mcgLayerSupportGroup.checkIn([layerKiKGroup, layerActionGroup, layerMacgeizGroup, layerTediGroup, layerBlackdeGroup, layerEuroshopGroup, layerWoolworthGroup, layerZeemanGroup, layerTakkoGroup, layerNKDGroup, layerAWGGroup, layerKauflandGroup, layerLidlGroup, layerAldiGroup, layerNormaGroup, layerPennyGroup, layerXenosGroup, layerTigerStoreGroup]);
 
 var iconSize = [16, 16];
 var iconAnchor = [8, 8];
@@ -497,6 +498,7 @@ $.getJSON("data/tigerstore.geojson", function (data) {
 	layerTigerStoreGroup.addLayer(layerTigerStore);
 });
 
+/*
 var layerDeutschePost = L.geoJson(null, {
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
@@ -578,7 +580,7 @@ $.getJSON("data/ikea.geojson", function (data) {
 	layerIkeaGroup.addLayer(layerIkea);
 });
 
-
+*/
 var baseLayers = {
 	"Google Roads Custom": layerGoogleRoadsCustom,
 	"Google Roads": layerGoogleRoads,
@@ -602,18 +604,19 @@ var overlayMaps = {
 		"<img src='icons/takko.png' style='height: 16px'> Takko <span id='counter_takko'></span>": layerTakko,
 		"<img src='icons/nkd.png' style='height: 16px'> NKD <span id='counter_nkd'></span>": layerNKD,
 		"<img src='icons/awg.png' style='height: 16px'> AWG <span id='counter_awg'></span>": layerAWG,
-
 		"<img src='icons/kaufland.png' style='height: 16px'> Kaufland <span id='counter_kaufland'></span>": layerKaufland,
 		"<img src='icons/lidl.png' style='height: 16px'> Lidl <span id='counter_lidl'></span>": layerLidl,
 		"<img src='icons/aldi.png' style='height: 16px'> Aldi <span id='counter_aldi'></span>": layerAldi,
 		"<img src='icons/norma.png' style='height: 16px'> Norma <span id='counter_norma'></span>": layerNorma,
 		"<img src='icons/penny.png' style='height: 16px'> Penny <span id='counter_penny'></span>": layerPenny,
 		"<img src='icons/xenos.png' style='height: 16px'> Xenos <span id='counter_xenos'></span>": layerXenos,
-		"<img src='icons/tigerstore.png' style='height: 16px'> Tiger Store <span id='counter_tigerstore'></span>": layerTigerStore,
-		"<img src='icons/deutschepost.png' style='height: 16px'> Deutsche Post <span id='counter_deutschepost'></span>": layerDeutschePost,
-		"<img src='icons/mrssporty.png' style='height: 16px'> Mrs. Sporty <span id='counter_mrssporty'></span>": layerMrsSporty,
-		"<img src='icons/mcfit.png' style='height: 16px'> McFit <span id='counter_mcfit'></span>": layerMcFit,
-		"<img src='icons/ikea.png' style='height: 16px'> Ikea <span id='counter_ikea'></span>": layerIkea
+		"<img src='icons/tigerstore.png' style='height: 16px'> Tiger Store <span id='counter_tigerstore'></span>": layerTigerStore
+		/*
+				"<img src='icons/deutschepost.png' style='height: 16px'> Deutsche Post <span id='counter_deutschepost'></span>": layerDeutschePost,
+				"<img src='icons/mrssporty.png' style='height: 16px'> Mrs. Sporty <span id='counter_mrssporty'></span>": layerMrsSporty,
+				"<img src='icons/mcfit.png' style='height: 16px'> McFit <span id='counter_mcfit'></span>": layerMcFit,
+				"<img src='icons/ikea.png' style='height: 16px'> Ikea <span id='counter_ikea'></span>": layerIkea
+		*/
 	}
 };
 
@@ -626,10 +629,14 @@ L.control.groupedLayers(baseLayers, overlayMaps, {
 map.on("overlayremove", function (e) {
 	if (!map.hasLayer(layerKiK) && !map.hasLayer(layerAction) && !map.hasLayer(layerMacgeiz) && !map.hasLayer(layerTedi) &&
 		!map.hasLayer(layerBlackde) && !map.hasLayer(layerEuroshop) && !map.hasLayer(layerWoolworth) && !map.hasLayer(layerZeeman) &&
-		!map.hasLayer(layerTakko) && !map.hasLayer(layerNKD) && !map.hasLayer(layerAWG)) {
+		!map.hasLayer(layerTakko) && !map.hasLayer(layerNKD) && !map.hasLayer(layerAWG) && !map.hasLayer(layerKaufland) &&
+		!map.hasLayer(layerLidl) && !map.hasLayer(layerAldi) && !map.hasLayer(layerNorma) && !map.hasLayer(layerPenny) &&
+		!map.hasLayer(layerXenos) && !map.hasLayer(layerTigerStore)) {
 		$(".leaflet-control-layers-group-selector").prop("checked", false);
 	};
 });
+
+
 
 layerGoogleRoadsCustom.addTo(map);
 
@@ -651,10 +658,10 @@ layerNormaGroup.addTo(map);
 layerPennyGroup.addTo(map);
 layerXenosGroup.addTo(map);
 layerTigerStoreGroup.addTo(map);
-layerDeutschePostGroup.addTo(map);
-layerMrsSportyGroup.addTo(map);
-layerMcFitGroup.addTo(map);
-layerIkeaGroup.addTo(map);
+// layerDeutschePostGroup.addTo(map);
+// layerMrsSportyGroup.addTo(map);
+// layerMcFitGroup.addTo(map);
+// layerIkeaGroup.addTo(map);
 
 
 setTimeout(function () {
@@ -663,8 +670,8 @@ setTimeout(function () {
 
 
 map.on("overlayadd overlayremove moveend zoomend", function (e) {
-	//iconSizeUpdate(size16);
-	//getFeatureCount();
+	iconSizeUpdate(size16);
+	getFeatureCount();
 });
 
 
@@ -727,7 +734,7 @@ map.setZoom(map.getZoom() - 1);
 
 
 function getFeatureCount() {
-/*
+
 	var total_kik = featureCount["layerKiK"][0];
 	var total_action = featureCount["layerAction"][0];
 	var total_macgeiz = featureCount["layerMacgeiz"][0];
@@ -739,7 +746,6 @@ function getFeatureCount() {
 	var total_takko = featureCount["layerTakko"][0];
 	var total_nkd = featureCount["layerNKD"][0];
 	var total_awg = featureCount["layerAWG"][0];
-
 	var total_kaufland = featureCount["layerKaufland"][0];
 	var total_lidl = featureCount["layerLidl"][0];
 	var total_aldi = featureCount["layerAldi"][0];
@@ -747,12 +753,13 @@ function getFeatureCount() {
 	var total_penny = featureCount["layerPenny"][0];
 	var total_xenos = featureCount["layerXenos"][0];
 	var total_tigerstore = featureCount["layerTigerStore"][0];
-	var total_deutschepost = featureCount["layerDeutschePost"][0];
-	var total_mrssporty = featureCount["layerMrsSporty"][0];
-	var total_mcfit = featureCount["layerMcFit"][0];
-	var total_ikea = featureCount["layerIkea"][0];
+	// var total_deutschepost = featureCount["layerDeutschePost"][0];
+	// var total_mrssporty = featureCount["layerMrsSporty"][0];
+	// var total_mcfit = featureCount["layerMcFit"][0];
+	// var total_ikea = featureCount["layerIkea"][0];
 
-	var total_count = total_kik + total_action + total_macgeiz + total_tedi + total_blackde + total_euroshop + total_woolworth + total_zeeman + total_takko + total_nkd + total_awg + total_kaufland + total_lidl + total_aldi + total_norma + total_penny + total_xenos + total_tigerstore + total_deutschepost + total_mrssporty + total_mcfit + total_ikea;
+	//var total_count = total_kik + total_action + total_macgeiz + total_tedi + total_blackde + total_euroshop + total_woolworth + total_zeeman + total_takko + total_nkd + total_awg + total_kaufland + total_lidl + total_aldi + total_norma + total_penny + total_xenos + total_tigerstore + total_deutschepost + total_mrssporty + total_mcfit + total_ikea;
+	var total_count = total_kik + total_action + total_macgeiz + total_tedi + total_blackde + total_euroshop + total_woolworth + total_zeeman + total_takko + total_nkd + total_awg + total_kaufland + total_lidl + total_aldi + total_norma + total_penny + total_xenos + total_tigerstore;
 
 	if (map.hasLayer(layerKiK)) {
 		layerKiKGroup.eachLayer(function (e) {
@@ -1005,62 +1012,62 @@ function getFeatureCount() {
 		featureCount["layerTigerStore"][1] = 0;
 	};
 
-
-	if (map.hasLayer(layerDeutschePost)) {
-		layerDeutschePostGroup.eachLayer(function (e) {
+	/*
+		if (map.hasLayer(layerDeutschePost)) {
+			layerDeutschePostGroup.eachLayer(function (e) {
+				featureCount["layerDeutschePost"][1] = 0;
+				e.eachLayer(function (layer) {
+					if (map.getBounds().contains(layer.getLatLng())) {
+						featureCount["layerDeutschePost"][1]++;
+					};
+				});
+			});
+		} else {
 			featureCount["layerDeutschePost"][1] = 0;
-			e.eachLayer(function (layer) {
-				if (map.getBounds().contains(layer.getLatLng())) {
-					featureCount["layerDeutschePost"][1]++;
-				};
+		};
+
+
+		if (map.hasLayer(layerMrsSporty)) {
+			layerMrsSportyGroup.eachLayer(function (e) {
+				featureCount["layerMrsSporty"][1] = 0;
+				e.eachLayer(function (layer) {
+					if (map.getBounds().contains(layer.getLatLng())) {
+						featureCount["layerMrsSporty"][1]++;
+					};
+				});
 			});
-		});
-	} else {
-		featureCount["layerDeutschePost"][1] = 0;
-	};
-
-
-	if (map.hasLayer(layerMrsSporty)) {
-		layerMrsSportyGroup.eachLayer(function (e) {
+		} else {
 			featureCount["layerMrsSporty"][1] = 0;
-			e.eachLayer(function (layer) {
-				if (map.getBounds().contains(layer.getLatLng())) {
-					featureCount["layerMrsSporty"][1]++;
-				};
+		};
+
+
+		if (map.hasLayer(layerMcFit)) {
+			layerMcFitGroup.eachLayer(function (e) {
+				featureCount["layerMcFit"][1] = 0;
+				e.eachLayer(function (layer) {
+					if (map.getBounds().contains(layer.getLatLng())) {
+						featureCount["layerMcFit"][1]++;
+					};
+				});
 			});
-		});
-	} else {
-		featureCount["layerMrsSporty"][1] = 0;
-	};
-
-
-	if (map.hasLayer(layerMcFit)) {
-		layerMcFitGroup.eachLayer(function (e) {
+		} else {
 			featureCount["layerMcFit"][1] = 0;
-			e.eachLayer(function (layer) {
-				if (map.getBounds().contains(layer.getLatLng())) {
-					featureCount["layerMcFit"][1]++;
-				};
+		};
+
+
+		if (map.hasLayer(layerIkea)) {
+			layerIkeaGroup.eachLayer(function (e) {
+				featureCount["layerIkea"][1] = 0;
+				e.eachLayer(function (layer) {
+					if (map.getBounds().contains(layer.getLatLng())) {
+						featureCount["layerIkea"][1]++;
+					};
+				});
 			});
-		});
-	} else {
-		featureCount["layerMcFit"][1] = 0;
-	};
-
-
-	if (map.hasLayer(layerIkea)) {
-		layerIkeaGroup.eachLayer(function (e) {
+		} else {
 			featureCount["layerIkea"][1] = 0;
-			e.eachLayer(function (layer) {
-				if (map.getBounds().contains(layer.getLatLng())) {
-					featureCount["layerIkea"][1]++;
-				};
-			});
-		});
-	} else {
-		featureCount["layerIkea"][1] = 0;
-	};
-
+		};
+	*/
 
 	var view_kik = featureCount["layerKiK"][1];
 	var view_action = featureCount["layerAction"][1];
@@ -1081,37 +1088,38 @@ function getFeatureCount() {
 	var view_penny = featureCount["layerPenny"][1];
 	var view_xenos = featureCount["layerXenos"][1];
 	var view_tigerstore = featureCount["layerTigerStore"][1];
-	var view_deutschepost = featureCount["layerDeutschePost"][1];
-	var view_mrssporty = featureCount["layerMrsSporty"][1];
-	var view_mcfit = featureCount["layerMcFit"][1];
-	var view_ikea = featureCount["layerIkea"][1];
+	// var view_deutschepost = featureCount["layerDeutschePost"][1];
+	// var view_mrssporty = featureCount["layerMrsSporty"][1];
+	// var view_mcfit = featureCount["layerMcFit"][1];
+	// var view_ikea = featureCount["layerIkea"][1];
 
-	var view_count = view_kik + view_action + view_macgeiz + view_tedi + view_blackde + view_euroshop + view_woolworth + view_zeeman + view_takko + view_nkd + view_awg + view_kaufland + view_lidl + view_aldi + view_norma + view_penny + view_xenos + view_tigerstore + view_deutschepost + view_mrssporty + view_mcfit + view_ikea;
-*/
-	// $('#counter_kik').text('(' + view_kik + '/' + total_kik + ')');
-	// $('#counter_action').text('(' + view_action + '/' + total_action + ')');
-	// $('#counter_macgeiz').text('(' + view_macgeiz + '/' + total_macgeiz + ')');
-	// $('#counter_tedi').text('(' + view_tedi + '/' + total_tedi + ')');
-	// $('#counter_blackde').text('(' + view_blackde + '/' + total_blackde + ')');
-	// $('#counter_euroshop').text('(' + view_euroshop + '/' + total_euroshop + ')');
-	// $('#counter_woolworth').text('(' + view_woolworth + '/' + total_woolworth + ')');
-	// $('#counter_zeeman').text('(' + view_zeeman + '/' + total_zeeman + ')');
-	// $('#counter_takko').text('(' + view_takko + '/' + total_takko + ')');
-	// $('#counter_nkd').text('(' + view_nkd + '/' + total_nkd + ')');
-	// $('#counter_awg').text('(' + view_awg + '/' + total_awg + ')');
+	//var view_count = view_kik + view_action + view_macgeiz + view_tedi + view_blackde + view_euroshop + view_woolworth + view_zeeman + view_takko + view_nkd + view_awg + view_kaufland + view_lidl + view_aldi + view_norma + view_penny + view_xenos + view_tigerstore + view_deutschepost + view_mrssporty + view_mcfit + view_ikea;
+	var view_count = view_kik + view_action + view_macgeiz + view_tedi + view_blackde + view_euroshop + view_woolworth + view_zeeman + view_takko + view_nkd + view_awg + view_kaufland + view_lidl + view_aldi + view_norma + view_penny + view_xenos + view_tigerstore;
 
-	// $('#counter_kaufland').text('(' + view_kaufland + '/' + total_kaufland + ')');
-	// $('#counter_lidl').text('(' + view_lidl + '/' + total_lidl + ')');
-	// $('#counter_aldi').text('(' + view_aldi + '/' + total_aldi + ')');
-	// $('#counter_norma').text('(' + view_norma + '/' + total_norma + ')');
-	// $('#counter_penny').text('(' + view_penny + '/' + total_penny + ')');
-	// $('#counter_xenos').text('(' + view_xenos + '/' + total_xenos + ')');
-	// $('#counter_tigerstore').text('(' + view_tigerstore + '/' + total_tigerstore + ')');
+	$('#counter_kik').text('(' + view_kik + '/' + total_kik + ')');
+	$('#counter_action').text('(' + view_action + '/' + total_action + ')');
+	$('#counter_macgeiz').text('(' + view_macgeiz + '/' + total_macgeiz + ')');
+	$('#counter_tedi').text('(' + view_tedi + '/' + total_tedi + ')');
+	$('#counter_blackde').text('(' + view_blackde + '/' + total_blackde + ')');
+	$('#counter_euroshop').text('(' + view_euroshop + '/' + total_euroshop + ')');
+	$('#counter_woolworth').text('(' + view_woolworth + '/' + total_woolworth + ')');
+	$('#counter_zeeman').text('(' + view_zeeman + '/' + total_zeeman + ')');
+	$('#counter_takko').text('(' + view_takko + '/' + total_takko + ')');
+	$('#counter_nkd').text('(' + view_nkd + '/' + total_nkd + ')');
+	$('#counter_awg').text('(' + view_awg + '/' + total_awg + ')');
+
+	$('#counter_kaufland').text('(' + view_kaufland + '/' + total_kaufland + ')');
+	$('#counter_lidl').text('(' + view_lidl + '/' + total_lidl + ')');
+	$('#counter_aldi').text('(' + view_aldi + '/' + total_aldi + ')');
+	$('#counter_norma').text('(' + view_norma + '/' + total_norma + ')');
+	$('#counter_penny').text('(' + view_penny + '/' + total_penny + ')');
+	$('#counter_xenos').text('(' + view_xenos + '/' + total_xenos + ')');
+	$('#counter_tigerstore').text('(' + view_tigerstore + '/' + total_tigerstore + ')');
 	// $('#counter_deutschepost').text('(' + view_deutschepost + '/' + total_deutschepost + ')');
 	// $('#counter_mrssporty').text('(' + view_mrssporty + '/' + total_mrssporty + ')');
 	// $('#counter_mcfit').text('(' + view_mcfit + '/' + total_mcfit + ')');
 	// $('#counter_ikea').text('(' + view_ikea + '/' + total_ikea + ')');
 
-	// $('#counter_total').text('(' + view_count + '/' + total_count + ')');
+	$('#counter_total').text('(' + view_count + '/' + total_count + ')');
 
 };
