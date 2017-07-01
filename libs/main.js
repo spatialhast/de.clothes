@@ -74,8 +74,8 @@ var mcgLayerSupportGroup = L.markerClusterGroup.layerSupport({
 	layerZeemanGroup = L.layerGroup(),
 	layerTakkoGroup = L.layerGroup(),
 	layerNKDGroup = L.layerGroup(),
-	layerAWGGroup = L.layerGroup()
-layerKauflandGroup = L.layerGroup(),
+	layerAWGGroup = L.layerGroup(),
+	layerKauflandGroup = L.layerGroup(),
 	layerLidlGroup = L.layerGroup(),
 	layerAldiGroup = L.layerGroup(),
 	layerNormaGroup = L.layerGroup(),
@@ -113,11 +113,11 @@ var featureCount = {
 	"layerNorma": [0, 0],
 	"layerPenny": [0, 0],
 	"layerXenos": [0, 0],
-	"layerTigerStore": [0, 0],
-	"layerDeutschePost": [0, 0],
-	"layerMrsSporty": [0, 0],
-	"layerMcFit": [0, 0],
-	"layerIkea": [0, 0]
+	"layerTigerStore": [0, 0]
+	// "layerDeutschePost": [0, 0],
+	// "layerMrsSporty": [0, 0],
+	// "layerMcFit": [0, 0],
+	// "layerIkea": [0, 0]
 };
 
 
