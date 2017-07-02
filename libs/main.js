@@ -591,26 +591,29 @@ var baseLayers = {
 };
 
 
+
+
+
 var overlayMaps = {
 	"On/off all layers <span id='counter_total'></span>": {
-		"<img src='icons/kik.png' style='height: 16px'>  KiK <span id='counter_kik'></span>": layerKiK,
-		"<img src='icons/action.png' style='height: 16px'>  Action <span id='counter_action'></span>": layerAction,
-		"<img src='icons/macgeiz.png' style='height: 16px'> MacGeiz <span id='counter_macgeiz'></span>": layerMacgeiz,
-		"<img src='icons/tedi.png' style='height: 16px'> Tedi <span id='counter_tedi'></span>": layerTedi,
-		"<img src='icons/blackde.png' style='height: 16px'> Black.de <span id='counter_blackde'></span>": layerBlackde,
-		"<img src='icons/euroshop.png' style='height: 16px'> Euroshop <span id='counter_euroshop'></span>": layerEuroshop,
-		"<img src='icons/woolworth.png' style='height: 16px'> Woolworth <span id='counter_woolworth'></span>": layerWoolworth,
-		"<img src='icons/zeeman.png' style='height: 16px'> Zeeman <span id='counter_zeeman'></span>": layerZeeman,
-		"<img src='icons/takko.png' style='height: 16px'> Takko <span id='counter_takko'></span>": layerTakko,
-		"<img src='icons/nkd.png' style='height: 16px'> NKD <span id='counter_nkd'></span>": layerNKD,
-		"<img src='icons/awg.png' style='height: 16px'> AWG <span id='counter_awg'></span>": layerAWG,
-		"<img src='icons/kaufland.png' style='height: 16px'> Kaufland <span id='counter_kaufland'></span>": layerKaufland,
-		"<img src='icons/lidl.png' style='height: 16px'> Lidl <span id='counter_lidl'></span>": layerLidl,
-		"<img src='icons/aldi.png' style='height: 16px'> Aldi <span id='counter_aldi'></span>": layerAldi,
-		"<img src='icons/norma.png' style='height: 16px'> Norma <span id='counter_norma'></span>": layerNorma,
-		"<img src='icons/penny.png' style='height: 16px'> Penny <span id='counter_penny'></span>": layerPenny,
-		"<img src='icons/xenos.png' style='height: 16px'> Xenos <span id='counter_xenos'></span>": layerXenos,
-		"<img src='icons/tigerstore.png' style='height: 16px'> Tiger Store <span id='counter_tigerstore'></span>": layerTigerStore
+		"<img src='icons/kik.png' style='height: 16px'>  KiK <span id='counter_kik'></span>": layerKiKGroup,
+		"<img src='icons/action.png' style='height: 16px'>  Action <span id='counter_action'></span>": layerActionGroup,
+		"<img src='icons/macgeiz.png' style='height: 16px'> MacGeiz <span id='counter_macgeiz'></span>": layerMacgeizGroup,
+		"<img src='icons/tedi.png' style='height: 16px'> Tedi <span id='counter_tedi'></span>": layerTediGroup,
+		"<img src='icons/blackde.png' style='height: 16px'> Black.de <span id='counter_blackde'></span>": layerBlackdeGroup,
+		"<img src='icons/euroshop.png' style='height: 16px'> Euroshop <span id='counter_euroshop'></span>": layerEuroshopGroup,
+		"<img src='icons/woolworth.png' style='height: 16px'> Woolworth <span id='counter_woolworth'></span>": layerWoolworthGroup,
+		"<img src='icons/zeeman.png' style='height: 16px'> Zeeman <span id='counter_zeeman'></span>": layerZeemanGroup,
+		"<img src='icons/takko.png' style='height: 16px'> Takko <span id='counter_takko'></span>": layerTakkoGroup,
+		"<img src='icons/nkd.png' style='height: 16px'> NKD <span id='counter_nkd'></span>": layerNKDGroup,
+		"<img src='icons/awg.png' style='height: 16px'> AWG <span id='counter_awg'></span>": layerAWGGroup,
+		"<img src='icons/kaufland.png' style='height: 16px'> Kaufland <span id='counter_kaufland'></span>": layerKauflandGroup,
+		"<img src='icons/lidl.png' style='height: 16px'> Lidl <span id='counter_lidl'></span>": layerLidlGroup,
+		"<img src='icons/aldi.png' style='height: 16px'> Aldi <span id='counter_aldi'></span>": layerAldiGroup,
+		"<img src='icons/norma.png' style='height: 16px'> Norma <span id='counter_norma'></span>": layerNormaGroup,
+		"<img src='icons/penny.png' style='height: 16px'> Penny <span id='counter_penny'></span>": layerPennyGroup,
+		"<img src='icons/xenos.png' style='height: 16px'> Xenos <span id='counter_xenos'></span>": layerXenosGroup,
+		"<img src='icons/tigerstore.png' style='height: 16px'> Tiger Store <span id='counter_tigerstore'></span>": layerTigerStoreGroup
 		/*
 				"<img src='icons/deutschepost.png' style='height: 16px'> Deutsche Post <span id='counter_deutschepost'></span>": layerDeutschePost,
 				"<img src='icons/mrssporty.png' style='height: 16px'> Mrs. Sporty <span id='counter_mrssporty'></span>": layerMrsSporty,
@@ -621,21 +624,60 @@ var overlayMaps = {
 };
 
 L.control.groupedLayers(baseLayers, overlayMaps, {
+//L.control.layers(baseLayers, overlayMaps, {
 	collapsed: false,
 	groupCheckboxes: true
 }).addTo(map);
 
 
 map.on("overlayremove", function (e) {
-	if (!map.hasLayer(layerKiK) && !map.hasLayer(layerAction) && !map.hasLayer(layerMacgeiz) && !map.hasLayer(layerTedi) &&
-		!map.hasLayer(layerBlackde) && !map.hasLayer(layerEuroshop) && !map.hasLayer(layerWoolworth) && !map.hasLayer(layerZeeman) &&
-		!map.hasLayer(layerTakko) && !map.hasLayer(layerNKD) && !map.hasLayer(layerAWG) && !map.hasLayer(layerKaufland) &&
-		!map.hasLayer(layerLidl) && !map.hasLayer(layerAldi) && !map.hasLayer(layerNorma) && !map.hasLayer(layerPenny) &&
-		!map.hasLayer(layerXenos) && !map.hasLayer(layerTigerStore)) {
+	if (!map.hasLayer(layerKiKGroup) && !map.hasLayer(layerActionGroup) && !map.hasLayer(layerMacgeizGroup) && !map.hasLayer(layerTediGroup) &&
+		!map.hasLayer(layerBlackdeGroup) && !map.hasLayer(layerEuroshopGroup) && !map.hasLayer(layerWoolworthGroup) && !map.hasLayer(layerZeemanGroup) &&
+		!map.hasLayer(layerTakkoGroup) && !map.hasLayer(layerNKDGroup) && !map.hasLayer(layerAWGGroup) && !map.hasLayer(layerKauflandGroup) &&
+		!map.hasLayer(layerLidlGroup) && !map.hasLayer(layerAldiGroup) && !map.hasLayer(layerNormaGroup) && !map.hasLayer(layerPennyGroup) &&
+		!map.hasLayer(layerXenosGroup) && !map.hasLayer(layerTigerStoreGroup)) {
 		$(".leaflet-control-layers-group-selector").prop("checked", false);
 	};
 });
+map.on("overlayadd", function (e) {
+	if (map.hasLayer(layerKiKGroup) && map.hasLayer(layerActionGroup) && map.hasLayer(layerMacgeizGroup) && map.hasLayer(layerTediGroup) &&
+		map.hasLayer(layerBlackdeGroup) && map.hasLayer(layerEuroshopGroup) && map.hasLayer(layerWoolworthGroup) && map.hasLayer(layerZeemanGroup) &&
+		map.hasLayer(layerTakkoGroup) && map.hasLayer(layerNKDGroup) && map.hasLayer(layerAWGGroup) && map.hasLayer(layerKauflandGroup) &&
+		map.hasLayer(layerLidlGroup) && map.hasLayer(layerAldiGroup) && map.hasLayer(layerNormaGroup) && map.hasLayer(layerPennyGroup) &&
+		map.hasLayer(layerXenosGroup) && map.hasLayer(layerTigerStoreGroup)) {
+		$(".leaflet-control-layers-group-selector").prop("checked", true);
+	};
+});
 
+
+// hash
+// var allMapLayers = {
+// 	"gc": layerGoogleRoadsCustom,
+// 	"gr": layerGoogleRoads,
+// 	"osm": layerOSM,
+// 	"ms": layerMapSurfer,
+// 	"mi": layerMapboxImagery,
+// 	"el": layerEmpty,
+// 	"ki": layerKiKGroup,
+// 	"ac": layerActionGroup,
+// 	"ma": layerMacgeizGroup,
+// 	"te": layerTediGroup,
+// 	"bl": layerBlackdeGroup,
+// 	"eu": layerEuroshopGroup,
+// 	"wo": layerWoolworthGroup,
+// 	"ze": layerZeemanGroup,
+// 	"ta": layerTakkoGroup,
+// 	"nk": layerNKDGroup,
+// 	"aw": layerAWGGroup,
+// 	"ka": layerKauflandGroup,
+// 	"li": layerLidlGroup,
+// 	"al": layerAldiGroup,
+// 	"no": layerNormaGroup,
+// 	"pe": layerPennyGroup,
+// 	"xe": layerXenos,
+// 	"ti": layerTigerStore
+// };
+// L.hash(map, allMapLayers);
 
 
 layerGoogleRoadsCustom.addTo(map);
@@ -658,10 +700,43 @@ layerNormaGroup.addTo(map);
 layerPennyGroup.addTo(map);
 layerXenosGroup.addTo(map);
 layerTigerStoreGroup.addTo(map);
+
+
+
 // layerDeutschePostGroup.addTo(map);
 // layerMrsSportyGroup.addTo(map);
 // layerMcFitGroup.addTo(map);
 // layerIkeaGroup.addTo(map);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 setTimeout(function () {
@@ -729,6 +804,7 @@ var iconClusterControl = L.easyButton('<strong id="cluster-status-element">D</st
 iconClusterControl.addTo(map);
 
 map.setZoom(map.getZoom() - 1);
+
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
