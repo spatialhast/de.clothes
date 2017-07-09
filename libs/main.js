@@ -8,7 +8,7 @@ var map = L.map('map', {
 map.doubleClickZoom.disable();
 
 var zoomControl = L.control.zoom({
-	position: "bottomright"
+	position: "topleft"
 }).addTo(map);
 
 var layerOSM = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -590,42 +590,58 @@ var baseLayers = {
 
 
 var overlayMaps = {
-	//"On/off all layers <span id='counter_total'></span>": {
-	"<img src='icons/kik.png' style='height: 16px'>  KiK <span id='counter_kik'></span>": layerKiKGroup,
-	"<img src='icons/action.png' style='height: 16px'>  Action <span id='counter_action'></span>": layerActionGroup,
-	"<img src='icons/macgeiz.png' style='height: 16px'> MacGeiz <span id='counter_macgeiz'></span>": layerMacgeizGroup,
-	"<img src='icons/tedi.png' style='height: 16px'> Tedi <span id='counter_tedi'></span>": layerTediGroup,
-	"<img src='icons/blackde.png' style='height: 16px'> Black.de <span id='counter_blackde'></span>": layerBlackdeGroup,
-	"<img src='icons/euroshop.png' style='height: 16px'> Euroshop <span id='counter_euroshop'></span>": layerEuroshopGroup,
-	"<img src='icons/woolworth.png' style='height: 16px'> Woolworth <span id='counter_woolworth'></span>": layerWoolworthGroup,
-	"<img src='icons/zeeman.png' style='height: 16px'> Zeeman <span id='counter_zeeman'></span>": layerZeemanGroup,
-	"<img src='icons/takko.png' style='height: 16px'> Takko <span id='counter_takko'></span>": layerTakkoGroup,
-	"<img src='icons/nkd.png' style='height: 16px'> NKD <span id='counter_nkd'></span>": layerNKDGroup,
-	"<img src='icons/awg.png' style='height: 16px'> AWG <span id='counter_awg'></span>": layerAWGGroup,
-	"<img src='icons/kaufland.png' style='height: 16px'> Kaufland <span id='counter_kaufland'></span>": layerKauflandGroup,
-	"<img src='icons/lidl.png' style='height: 16px'> Lidl <span id='counter_lidl'></span>": layerLidlGroup,
-	"<img src='icons/aldi.png' style='height: 16px'> Aldi <span id='counter_aldi'></span>": layerAldiGroup,
-	"<img src='icons/norma.png' style='height: 16px'> Norma <span id='counter_norma'></span>": layerNormaGroup,
-	"<img src='icons/penny.png' style='height: 16px'> Penny <span id='counter_penny'></span>": layerPennyGroup,
-	"<img src='icons/xenos.png' style='height: 16px'> Xenos <span id='counter_xenos'></span>": layerXenosGroup,
-	"<img src='icons/tigerstore.png' style='height: 16px'> Tiger Store <span id='counter_tigerstore'></span>": layerTigerStoreGroup,
-	//"<img src='icons/deutschepost.png' style='height: 16px'> Deutsche Post <span id='counter_deutschepost'></span>": layerDeutschePostGroup,
-	"<img src='icons/mrssporty.png' style='height: 16px'> Mrs. Sporty <span id='counter_mrssporty'></span>": layerMrsSportyGroup,
-	"<img src='icons/mcfit.png' style='height: 16px'> McFit <span id='counter_mcfit'></span>": layerMcFitGroup,
-	"<img src='icons/ikea.png' style='height: 16px'> Ikea <span id='counter_ikea'></span><br><hr>Total: <span id='counter_total'></span>": layerIkeaGroup
-
-	//}
+	"Clothing": {
+		"<img src='icons/kik.png' style='height: 16px'>  KiK <span id='counter_kik'></span>": layerKiKGroup,
+		"<img src='icons/zeeman.png' style='height: 16px'> Zeeman <span id='counter_zeeman'></span>": layerZeemanGroup,
+		"<img src='icons/takko.png' style='height: 16px'> Takko <span id='counter_takko'></span>": layerTakkoGroup,
+		"<img src='icons/nkd.png' style='height: 16px'> NKD <span id='counter_nkd'></span>": layerNKDGroup,
+		"<img src='icons/awg.png' style='height: 16px'> AWG <span id='counter_awg'></span>": layerAWGGroup
+	},
+	"Dollarstore": {
+		"<img src='icons/action.png' style='height: 16px'>  Action <span id='counter_action'></span>": layerActionGroup,
+		"<img src='icons/macgeiz.png' style='height: 16px'> MacGeiz <span id='counter_macgeiz'></span>": layerMacgeizGroup,
+		"<img src='icons/tedi.png' style='height: 16px'> Tedi <span id='counter_tedi'></span>": layerTediGroup,
+		"<img src='icons/blackde.png' style='height: 16px'> Black.de <span id='counter_blackde'></span>": layerBlackdeGroup,
+		"<img src='icons/euroshop.png' style='height: 16px'> Euroshop <span id='counter_euroshop'></span>": layerEuroshopGroup,
+		"<img src='icons/woolworth.png' style='height: 16px'> Woolworth <span id='counter_woolworth'></span>": layerWoolworthGroup
+	},
+	"Discounter": {
+		"<img src='icons/kaufland.png' style='height: 16px'> Kaufland <span id='counter_kaufland'></span>": layerKauflandGroup,
+		"<img src='icons/lidl.png' style='height: 16px'> Lidl <span id='counter_lidl'></span>": layerLidlGroup,
+		"<img src='icons/aldi.png' style='height: 16px'> Aldi <span id='counter_aldi'></span>": layerAldiGroup,
+		"<img src='icons/norma.png' style='height: 16px'> Norma <span id='counter_norma'></span>": layerNormaGroup,
+		"<img src='icons/penny.png' style='height: 16px'> Penny <span id='counter_penny'></span>": layerPennyGroup
+	},
+	"Accessoires": {
+		"<img src='icons/xenos.png' style='height: 16px'> Xenos <span id='counter_xenos'></span>": layerXenosGroup,
+		"<img src='icons/tigerstore.png' style='height: 16px'> Tiger Store <span id='counter_tigerstore'></span>": layerTigerStoreGroup,
+		"<img src='icons/ikea.png' style='height: 16px'> Ikea <span id='counter_ikea'></span>": layerIkeaGroup
+	},
+	"Sports Club": {
+		"<img src='icons/mrssporty.png' style='height: 16px'> Mrs. Sporty <span id='counter_mrssporty'></span>": layerMrsSportyGroup,
+		"<img src='icons/mcfit.png' style='height: 16px'> McFit <span id='counter_mcfit'></span>": layerMcFitGroup
+	}
+	// <br><hr>Total: <span id='counter_total'></span>
+	// "<img src='icons/deutschepost.png' style='height: 16px'> Deutsche Post <span id='counter_deutschepost'></span>": layerDeutschePostGroup
 };
 
 
-//L.control.groupedLayers(baseLayers, overlayMaps, {
-L.control.layers(baseLayers, overlayMaps, {
+var layerControl = L.control.groupedLayers(baseLayers, overlayMaps, {
+	//groupCheckboxes: true,
+	groupsCollapsable: true,
 	collapsed: false
-}).addTo(map);
+})
+map.addControl(layerControl);
 
 
-
-
+// var totalLayer = {
+// 	"All/none <span id='counter_total'></span>": L.tileLayer('', {
+// 		maxZoom: 20
+// 	})
+// };
+// L.control.layers(null, totalLayer, {
+// 	collapsed: false
+// }).addTo(map);
 
 
 var allMapLayers = {
@@ -752,7 +768,7 @@ var iconSizeControl = L.easyButton('<strong id="icon-size-element">32</strong>',
 	};
 	iconSizeUpdate(size16);
 }, 'Change icon size', {
-	position: 'bottomright'
+	position: 'topleft'
 });
 iconSizeControl.addTo(map);
 
@@ -786,11 +802,21 @@ var iconClusterControl = L.easyButton('<strong id="cluster-status-element">D</st
 	};
 	iconSizeUpdate(size16);
 }, 'Disable/enable POI clustering', {
-	position: 'bottomright'
+	position: 'topleft'
 });
 iconClusterControl.addTo(map);
 
-map.setView([map.getCenter()['lat'], map.getCenter()['lng'] - 0.0003], map.getZoom());
+// collapse layer groups
+var elems = document.getElementsByClassName("leaflet-control-layers-group group-collapsable");
+[].forEach.call(elems, function (el) {
+	el.classList.remove("collapsed");
+});
+
+
+setTimeout(function () {
+	map.setView([map.getCenter()['lat'], map.getCenter()['lng'] - 0.0003], map.getZoom());
+}, 500);
+
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
