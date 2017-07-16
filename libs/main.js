@@ -1342,3 +1342,11 @@ function getFeatureCount() {
 	$('#sport_club_total').text('(' + sport_club_view + '/' + sport_club_total + ')');
 
 };
+
+// state selector
+$('.state-control .selectpicker').selectpicker('val', 'Berlin');
+
+$('.state-control .selectpicker').on('change', function () {
+	var state = $('.state-control .selectpicker').selectpicker('val');
+	console.log(state);
+});

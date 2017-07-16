@@ -9,3 +9,19 @@ body,
     height: 100%;
     width: 100%;
 }
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin: 0;
+}
+
+label {
+    margin-bottom: 1px;
+    font-weight: normal;
+}
+
+.state-control {
+    top: 10px;
+    left: 50px;
+    position: absolute;
+}
