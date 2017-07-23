@@ -1,5 +1,8 @@
 'use strict';
 
+var defaultState = 'BE';
+
+
 var map = L.map('map', {
 	maxZoom: 20,
 	zoomControl: false
@@ -133,491 +136,637 @@ var featureCount = {
 
 
 // -----------------------------------------------------------------------------------------------------------------
+var layerKiKData = {}, // Clothing
+	layerZeemanData = {},
+	layerTakkoData = {},
+	layerNKDData = {},
+	layerAWGData = {},
+	layerActionData = {}, // Dollarstore
+	layerMacgeizData = {},
+	layerTediData = {},
+	layerBlackdeData = {},
+	layerEuroshopData = {},
+	layerWoolworthData = {},
+	layerPfennigPfeiferData = {},
+	layerKauflandData = {}, // Discounter
+	layerLidlData = {},
+	layerAldiData = {},
+	layerNormaData = {},
+	layerPennyData = {},
+	layerNettoMarkendiscountData = {},
+	layerNettoSchwarzData = {},
+	layerXenosData = {}, // Accessoires 
+	layerTigerStoreData = {},
+	layerIkeaData = {},
+	layerMrsSportyData = {}, // Sports Club
+	layerMcFitData = {};
 
-var layerKiK = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/kik.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerKiK"][0]++;
-	}
-});
-$.getJSON("data/kik.geojson", function (data) {
-	layerKiK.addData(data);
+
+function loadGeoJSONStoreData() {
+	// Clothing
+	$.getJSON("data/kik.geojson", function (data) {
+		layerKiKData = data;
+	});
+	$.getJSON("data/zeeman.geojson", function (data) {
+		layerZeemanData = data;
+	});
+	$.getJSON("data/takko.geojson", function (data) {
+		layerTakkoData = data;
+	});
+	$.getJSON("data/nkd.geojson", function (data) {
+		layerNKDData = data;
+	});
+	$.getJSON("data/awg.geojson", function (data) {
+		layerAWGData = data;
+	});
+	// Dollarstore
+	$.getJSON("data/action.geojson", function (data) {
+		layerActionData = data;
+	});
+	$.getJSON("data/macgeiz.geojson", function (data) {
+		layerMacgeizData = data;
+	});
+	$.getJSON("data/tedi.geojson", function (data) {
+		layerTediData = data;
+	});
+	$.getJSON("data/blackde.geojson", function (data) {
+		layerBlackdeData = data;
+	});
+	$.getJSON("data/euroshop.geojson", function (data) {
+		layerEuroshopData = data;
+	});
+	$.getJSON("data/woolworth.geojson", function (data) {
+		layerWoolworthData = data;
+	});
+	$.getJSON("data/pfennigpfeifer.geojson", function (data) {
+		layerPfennigPfeiferData = data;
+	});
+	// Discounter
+	$.getJSON("data/kaufland.geojson", function (data) {
+		layerKauflandData = data;
+	});
+	$.getJSON("data/lidl.geojson", function (data) {
+		layerLidlData = data;
+	});
+	$.getJSON("data/aldi.geojson", function (data) {
+		layerAldiData = data;
+	});
+	$.getJSON("data/norma.geojson", function (data) {
+		layerNormaData = data;
+	});
+	$.getJSON("data/penny.geojson", function (data) {
+		layerPennyData = data;
+	});
+	$.getJSON("data/nettomarkendiscount.geojson", function (data) {
+		layerNettoMarkendiscountData = data;
+	});
+	$.getJSON("data/nettoschwarz.geojson", function (data) {
+		layerNettoSchwarzData = data;
+	});
+	// Accessoires 
+	$.getJSON("data/xenos.geojson", function (data) {
+		layerXenosData = data;
+	});
+	$.getJSON("data/tigerstore.geojson", function (data) {
+		layerTigerStoreData = data;
+	});
+	$.getJSON("data/ikea.geojson", function (data) {
+		layerIkeaData = data;
+	});
+	// Sports Club
+	$.getJSON("data/mrssporty.geojson", function (data) {
+		layerMrsSportyData = data;
+	});
+	$.getJSON("data/mcfit.geojson", function (data) {
+		layerMcFitData = data;
+	});
+
+	setTimeout(function () {
+		updateStoreLayers(defaultState);
+	}, 500);
+};
+
+loadGeoJSONStoreData();
+
+
+function updateStoreLayers(state) {
+	// Clothing
+	var layerKiK = L.geoJson(layerKiKData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/kik.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerKiK"][0]++;
+		}
+	});
+	layerKiKGroup.clearLayers();
 	layerKiKGroup.addLayer(layerKiK);
-});
 
-var layerZeeman = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/zeeman.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerZeeman"][0]++;
-	}
-});
-$.getJSON("data/zeeman.geojson", function (data) {
-	layerZeeman.addData(data);
+	var layerZeeman = L.geoJson(layerZeemanData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/zeeman.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerZeeman"][0]++;
+		}
+	});
+	layerZeemanGroup.clearLayers();
 	layerZeemanGroup.addLayer(layerZeeman);
-});
 
-var layerTakko = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/takko.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerTakko"][0]++;
-	}
-});
-$.getJSON("data/takko.geojson", function (data) {
-	layerTakko.addData(data);
+	var layerTakko = L.geoJson(layerTakkoData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/takko.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerTakko"][0]++;
+		}
+	});
+	layerTakkoGroup.clearLayers();
 	layerTakkoGroup.addLayer(layerTakko);
-});
 
-var layerNKD = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/nkd.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerNKD"][0]++;
-	}
-});
-$.getJSON("data/nkd.geojson", function (data) {
-	layerNKD.addData(data);
+	var layerNKD = L.geoJson(layerNKDData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/nkd.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerNKD"][0]++;
+		}
+	});
+	layerNKDGroup.clearLayers();
 	layerNKDGroup.addLayer(layerNKD);
-});
 
-var layerAWG = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/awg.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerAWG"][0]++;
-	}
-});
-$.getJSON("data/awg.geojson", function (data) {
-	layerAWG.addData(data);
+	var layerAWG = L.geoJson(layerAWGData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/awg.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerAWG"][0]++;
+		}
+	});
+	layerAWGGroup.clearLayers();
 	layerAWGGroup.addLayer(layerAWG);
-});
 
-
-var layerAction = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/action.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerAction"][0]++;
-	}
-});
-$.getJSON("data/action.geojson", function (data) {
-	layerAction.addData(data);
+	// Dollarstore
+	var layerAction = L.geoJson(layerActionData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/action.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerAction"][0]++;
+		}
+	});
+	layerActionGroup.clearLayers();
 	layerActionGroup.addLayer(layerAction);
-});
 
-var layerMacgeiz = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/macgeiz.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerMacgeiz"][0]++;
-	}
-});
-$.getJSON("data/macgeiz.geojson", function (data) {
-	layerMacgeiz.addData(data);
+	var layerMacgeiz = L.geoJson(layerMacgeizData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/macgeiz.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerMacgeiz"][0]++;
+		}
+	});
+	layerMacgeizGroup.clearLayers();
 	layerMacgeizGroup.addLayer(layerMacgeiz);
-});
 
-var layerTedi = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/tedi.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerTedi"][0]++;
-	}
-});
-$.getJSON("data/tedi.geojson", function (data) {
-	layerTedi.addData(data);
+	var layerTedi = L.geoJson(layerTediData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/tedi.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerTedi"][0]++;
+		}
+	});
+	layerTediGroup.clearLayers();
 	layerTediGroup.addLayer(layerTedi);
-});
 
-var layerBlackde = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/blackde.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerBlackde"][0]++;
-	}
-});
-$.getJSON("data/blackde.geojson", function (data) {
-	layerBlackde.addData(data);
+	var layerBlackde = L.geoJson(layerBlackdeData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/blackde.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerBlackde"][0]++;
+		}
+	});
+	layerBlackdeGroup.clearLayers();
 	layerBlackdeGroup.addLayer(layerBlackde);
-});
 
-var layerEuroshop = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/euroshop.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerEuroshop"][0]++;
-	}
-});
-$.getJSON("data/euroshop.geojson", function (data) {
-	layerEuroshop.addData(data);
+	var layerEuroshop = L.geoJson(layerEuroshopData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/euroshop.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerEuroshop"][0]++;
+		}
+	});
+	layerEuroshopGroup.clearLayers();
 	layerEuroshopGroup.addLayer(layerEuroshop);
-});
 
-var layerWoolworth = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/woolworth.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerWoolworth"][0]++;
-	}
-});
-$.getJSON("data/woolworth.geojson", function (data) {
-	layerWoolworth.addData(data);
+	var layerWoolworth = L.geoJson(layerWoolworthData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/woolworth.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerWoolworth"][0]++;
+		}
+	});
+	layerWoolworthGroup.clearLayers();
 	layerWoolworthGroup.addLayer(layerWoolworth);
-});
 
-var layerPfennigPfeifer = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/pfennigpfeifer.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerPfennigPfeifer"][0]++;
-	}
-});
-$.getJSON("data/pfennigpfeifer.geojson", function (data) {
-	layerPfennigPfeifer.addData(data);
+	var layerPfennigPfeifer = L.geoJson(layerPfennigPfeiferData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/pfennigpfeifer.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerPfennigPfeifer"][0]++;
+		}
+	});
+	layerPfennigPfeiferGroup.clearLayers();
 	layerPfennigPfeiferGroup.addLayer(layerPfennigPfeifer);
-});
 
-var layerKaufland = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/kaufland.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerKaufland"][0]++;
-	}
-});
-$.getJSON("data/kaufland.geojson", function (data) {
-	layerKaufland.addData(data);
+	// Discounter
+	var layerKaufland = L.geoJson(layerKauflandData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/kaufland.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerKaufland"][0]++;
+		}
+	});
+	layerKauflandGroup.clearLayers();
 	layerKauflandGroup.addLayer(layerKaufland);
-});
 
-var layerLidl = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/lidl.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerLidl"][0]++;
-	}
-});
-$.getJSON("data/lidl.geojson", function (data) {
-	layerLidl.addData(data);
+	var layerLidl = L.geoJson(layerLidlData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/lidl.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerLidl"][0]++;
+		}
+	});
+	layerLidlGroup.clearLayers();
 	layerLidlGroup.addLayer(layerLidl);
-});
 
-var layerAldi = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/aldi.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerAldi"][0]++;
-	}
-});
-$.getJSON("data/aldi.geojson", function (data) {
-	layerAldi.addData(data);
+	var layerAldi = L.geoJson(layerAldiData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/aldi.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerAldi"][0]++;
+		}
+	});
+	layerAldiGroup.clearLayers();
 	layerAldiGroup.addLayer(layerAldi);
-});
 
-var layerNorma = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/norma.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerNorma"][0]++;
-	}
-});
-$.getJSON("data/norma.geojson", function (data) {
-	layerNorma.addData(data);
+	var layerNorma = L.geoJson(layerNormaData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/norma.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerNorma"][0]++;
+		}
+	});
+	layerNormaGroup.clearLayers();
 	layerNormaGroup.addLayer(layerNorma);
-});
 
-var layerPenny = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/penny.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerPenny"][0]++;
-	}
-});
-$.getJSON("data/penny.geojson", function (data) {
-	layerPenny.addData(data);
+	var layerPenny = L.geoJson(layerPennyData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/penny.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerPenny"][0]++;
+		}
+	});
+	layerPennyGroup.clearLayers();
 	layerPennyGroup.addLayer(layerPenny);
-});
 
-var layerNettoMarkendiscount = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/nettomarkendiscount.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerNettoMarkendiscount"][0]++;
-	}
-});
-$.getJSON("data/nettomarkendiscount.geojson", function (data) {
-	layerNettoMarkendiscount.addData(data);
+	var layerNettoMarkendiscount = L.geoJson(layerNettoMarkendiscountData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/nettomarkendiscount.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerNettoMarkendiscount"][0]++;
+		}
+	});
+	layerNettoMarkendiscountGroup.clearLayers();
 	layerNettoMarkendiscountGroup.addLayer(layerNettoMarkendiscount);
-});
 
-var layerNettoSchwarz = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/nettoschwarz.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerNettoSchwarz"][0]++;
-	}
-});
-$.getJSON("data/nettoschwarz.geojson", function (data) {
-	layerNettoSchwarz.addData(data);
+	var layerNettoSchwarz = L.geoJson(layerNettoSchwarzData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/nettoschwarz.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerNettoSchwarz"][0]++;
+		}
+	});
+	layerNettoSchwarzGroup.clearLayers();
 	layerNettoSchwarzGroup.addLayer(layerNettoSchwarz);
-});
-
-var layerXenos = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/xenos.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerXenos"][0]++;
-	}
-});
-$.getJSON("data/xenos.geojson", function (data) {
-	layerXenos.addData(data);
+	// Accessoires 
+	var layerXenos = L.geoJson(layerXenosData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/xenos.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerXenos"][0]++;
+		}
+	});
+	layerXenosGroup.clearLayers();
 	layerXenosGroup.addLayer(layerXenos);
-});
 
-var layerTigerStore = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/tigerstore.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerTigerStore"][0]++;
-	}
-});
-$.getJSON("data/tigerstore.geojson", function (data) {
-	layerTigerStore.addData(data);
+	var layerTigerStore = L.geoJson(layerTigerStoreData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/tigerstore.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerTigerStore"][0]++;
+		}
+	});
+	layerTigerStoreGroup.clearLayers();
 	layerTigerStoreGroup.addLayer(layerTigerStore);
-});
 
-var layerIkea = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/ikea.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerIkea"][0]++;
-	}
-});
-$.getJSON("data/ikea.geojson", function (data) {
-	layerIkea.addData(data);
+	var layerIkea = L.geoJson(layerIkeaData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/ikea.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerIkea"][0]++;
+		}
+	});
+	layerIkeaGroup.clearLayers();
 	layerIkeaGroup.addLayer(layerIkea);
-});
+	// Sports Club
 
+	var layerMrsSporty = L.geoJson(layerMrsSportyData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/mrssporty.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerMrsSporty"][0]++;
+		}
+	});
 
-var layerMrsSporty = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/mrssporty.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerMrsSporty"][0]++;
-	}
-});
-$.getJSON("data/mrssporty.geojson", function (data) {
-	layerMrsSporty.addData(data);
+	layerMrsSportyGroup.clearLayers();
 	layerMrsSportyGroup.addLayer(layerMrsSporty);
-});
 
-var layerMcFit = L.geoJson(null, {
-	pointToLayer: function (feature, latlng) {
-		return L.marker(latlng, {
-			icon: L.icon({
-				iconUrl: 'icons/mcfit.png',
-				iconSize: iconSize,
-				iconAnchor: iconAnchor
-			}),
-			riseOnHover: true
-		});
-	},
-	onEachFeature: function onEachFeature(feature, layer) {
-		featureCount["layerMcFit"][0]++;
-	}
-});
-$.getJSON("data/mcfit.geojson", function (data) {
-	layerMcFit.addData(data);
+	var layerMcFit = L.geoJson(layerMcFitData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/mcfit.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerMcFit"][0]++;
+		}
+	});
+	layerMcFitGroup.clearLayers();
 	layerMcFitGroup.addLayer(layerMcFit);
-});
+
+};
+
 
 /*
-var layerDeutschePost = L.geoJson(null, {
+var layerDeutschePost = L.geoJson(layerDeutschePostData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
 			icon: L.icon({
@@ -1343,7 +1492,7 @@ function getFeatureCount() {
 
 };
 
-var defaultState = 'BE';
+
 var statesData = {};
 var layerStatesGroup = L.featureGroup().addTo(map);
 // load states GeoJSON data
@@ -1358,7 +1507,7 @@ function selectByState(state) {
 	layerStatesGroup.clearLayers();
 	var layerStates = L.geoJson(statesData, {
 		filter: function (feature, layer) {
-			if (feature.properties.sname === state) return true
+			return feature.properties.sname === state
 		},
 		style: function (feature) {
 			return {
@@ -1381,4 +1530,5 @@ $('.state-control .selectpicker').selectpicker('val', defaultState);
 $('.state-control .selectpicker').on('change', function () {
 	var state = $('.state-control .selectpicker').selectpicker('val');
 	selectByState(state);
+	updateStoreLayers(state);
 });

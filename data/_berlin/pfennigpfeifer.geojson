@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "pfennigpfeifer",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "1", "address": "10409 Berlin Greifswalder Straße 90" }, "geometry": { "type": "Point", "coordinates": [ 13.4425535, 52.543477 ] } },
+{ "type": "Feature", "properties": { "id": "2", "address": "12687 Berlin Oberweißbacher Straße 7-9" }, "geometry": { "type": "Point", "coordinates": [ 13.5703851, 52.5572837 ] } },
+{ "type": "Feature", "properties": { "id": "3", "address": "12679 Berlin Marzahner Promenade 30" }, "geometry": { "type": "Point", "coordinates": [ 13.5488808, 52.5439568 ] } }
+]
+}
