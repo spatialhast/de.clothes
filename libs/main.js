@@ -1343,10 +1343,42 @@ function getFeatureCount() {
 
 };
 
-// state selector
-$('.state-control .selectpicker').selectpicker('val', 'Berlin');
+var defaultState = 'BE';
+var statesData = {};
+var layerStatesGroup = L.featureGroup().addTo(map);
+// load states GeoJSON data
+$.getJSON("data/states.geojson", function (data) {
+	statesData = data;
+	selectByState(defaultState);
+});
+
+
+// select state on the map
+function selectByState(state) {
+	layerStatesGroup.clearLayers();
+	var layerStates = L.geoJson(statesData, {
+		filter: function (feature, layer) {
+			if (feature.properties.sname === state) return true
+		},
+		style: function (feature) {
+			return {
+				color: "#ff0000",
+				weight: 2,
+				fillOpacity: 0,
+				clickable: false
+			}
+		}
+	});
+	layerStatesGroup.addLayer(layerStates);
+	map.fitBounds(layerStatesGroup.getBounds());
+};
+
+
+// init default state selector
+$('.state-control .selectpicker').selectpicker('val', defaultState);
+
 
 $('.state-control .selectpicker').on('change', function () {
 	var state = $('.state-control .selectpicker').selectpicker('val');
-	console.log(state);
+	selectByState(state);
 });
