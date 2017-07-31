@@ -2,7 +2,6 @@
 
 var defaultState = 'BE';
 
-
 var map = L.map('map', {
 	maxZoom: 20,
 	zoomControl: false
@@ -250,6 +249,36 @@ loadGeoJSONStoreData();
 
 
 function updateStoreLayers(state) {
+	// Clothing
+	featureCount["layerKiK"][0] = 0;
+	featureCount["layerZeeman"][0] = 0;
+	featureCount["layerTakko"][0] = 0;
+	featureCount["layerNKD"][0] = 0;
+	featureCount["layerAWG"][0] = 0;
+	// Dollarstore
+	featureCount["layerAction"][0] = 0;
+	featureCount["layerMacgeiz"][0] = 0;
+	featureCount["layerTedi"][0] = 0;
+	featureCount["layerBlackde"][0] = 0;
+	featureCount["layerEuroshop"][0] = 0;
+	featureCount["layerWoolworth"][0] = 0;
+	featureCount["layerPfennigPfeifer"][0] = 0;
+	// Discounter
+	featureCount["layerKaufland"][0] = 0;
+	featureCount["layerLidl"][0] = 0;
+	featureCount["layerAldi"][0] = 0;
+	featureCount["layerNorma"][0] = 0;
+	featureCount["layerPenny"][0] = 0;
+	featureCount["layerNettoMarkendiscount"][0] = 0;
+	featureCount["layerNettoSchwarz"][0] = 0;
+	// Accessoires 
+	featureCount["layerXenos"][0] = 0;
+	featureCount["layerTigerStore"][0] = 0;
+	featureCount["layerIkea"][0] = 0;
+	// Sports Club
+	featureCount["layerMrsSporty"][0] = 0;
+	featureCount["layerMcFit"][0] = 0;
+
 	// Clothing
 	var layerKiK = L.geoJson(layerKiKData, {
 		filter: function (feature, layer) {
@@ -1078,11 +1107,48 @@ function getFeatureCount() {
 	//var total_deutschepost = featureCount["layerDeutschePost"][0];
 	//var total_deutschepost = 0;
 
-	var clothing_total = total_kik + total_zeeman + total_takko + total_nkd + total_awg;
-	var dollarstore_total = total_action + total_macgeiz + total_tedi + total_blackde + total_euroshop + total_woolworth + total_pfennigpfeifer;
-	var discounter_total = total_kaufland + total_lidl + total_aldi + total_norma + total_penny + total_nettomarkendiscount + total_nettoschwarz;
-	var accessories_total = total_xenos + total_tigerstore + total_ikea;
-	var sport_club_total = total_mrssporty + total_mcfit;
+	var clothing_total = 0;
+	var dollarstore_total = 0;
+	var discounter_total = 0;
+	var accessories_total = 0;
+	var sport_club_total = 0;
+
+	// Clothing
+	featureCount["layerKiK"][1] = 0;
+	featureCount["layerZeeman"][1] = 0;
+	featureCount["layerTakko"][1] = 0;
+	featureCount["layerNKD"][1] = 0;
+	featureCount["layerAWG"][1] = 0;
+	// Dollarstore
+	featureCount["layerAction"][1] = 0;
+	featureCount["layerMacgeiz"][1] = 0;
+	featureCount["layerTedi"][1] = 0;
+	featureCount["layerBlackde"][1] = 0;
+	featureCount["layerEuroshop"][1] = 0;
+	featureCount["layerWoolworth"][1] = 0;
+	featureCount["layerPfennigPfeifer"][1] = 0;
+	// Discounter
+	featureCount["layerKaufland"][1] = 0;
+	featureCount["layerLidl"][1] = 0;
+	featureCount["layerAldi"][1] = 0;
+	featureCount["layerNorma"][1] = 0;
+	featureCount["layerPenny"][1] = 0;
+	featureCount["layerNettoMarkendiscount"][1] = 0;
+	featureCount["layerNettoSchwarz"][1] = 0;
+	// Accessoires 
+	featureCount["layerXenos"][1] = 0;
+	featureCount["layerTigerStore"][1] = 0;
+	featureCount["layerIkea"][1] = 0;
+	// Sports Club
+	featureCount["layerMrsSporty"][1] = 0;
+	featureCount["layerMcFit"][1] = 0;
+
+
+	clothing_total = total_kik + total_zeeman + total_takko + total_nkd + total_awg;
+	dollarstore_total = total_action + total_macgeiz + total_tedi + total_blackde + total_euroshop + total_woolworth + total_pfennigpfeifer;
+	discounter_total = total_kaufland + total_lidl + total_aldi + total_norma + total_penny + total_nettomarkendiscount + total_nettoschwarz;
+	accessories_total = total_xenos + total_tigerstore + total_ikea;
+	sport_club_total = total_mrssporty + total_mcfit;
 
 	if (map.hasLayer(layerKiKGroup)) {
 		layerKiKGroup.eachLayer(function (e) {
@@ -1447,11 +1513,18 @@ function getFeatureCount() {
 	//var view_deutschepost = featureCount["layerDeutschePost"][1];
 	//var view_deutschepost = 0;
 
-	var clothing_view = view_kik + view_zeeman + view_takko + view_nkd + view_awg;
-	var dollarstore_view = view_action + view_macgeiz + view_tedi + view_blackde + view_euroshop + view_woolworth + view_pfennigpfeifer;
-	var discounter_view = view_kaufland + view_lidl + view_aldi + view_norma + view_penny + view_nettomarkendiscount + view_nettoschwarz;
-	var accessories_view = view_xenos + view_tigerstore + view_ikea;
-	var sport_club_view = view_mrssporty + view_mcfit;
+	var clothing_view = 0;
+	var dollarstore_view = 0;
+	var discounter_view = 0;
+	var accessories_view = 0;
+	var sport_club_view = 0;
+
+
+	clothing_view = view_kik + view_zeeman + view_takko + view_nkd + view_awg;
+	dollarstore_view = view_action + view_macgeiz + view_tedi + view_blackde + view_euroshop + view_woolworth + view_pfennigpfeifer;
+	discounter_view = view_kaufland + view_lidl + view_aldi + view_norma + view_penny + view_nettomarkendiscount + view_nettoschwarz;
+	accessories_view = view_xenos + view_tigerstore + view_ikea;
+	sport_club_view = view_mrssporty + view_mcfit;
 
 	$('#counter_kik').text('(' + view_kik + '/' + total_kik + ')');
 	$('#counter_zeeman').text('(' + view_zeeman + '/' + total_zeeman + ')');
@@ -1531,4 +1604,5 @@ $('.state-control .selectpicker').on('change', function () {
 	var state = $('.state-control .selectpicker').selectpicker('val');
 	selectByState(state);
 	updateStoreLayers(state);
+	getFeatureCount();
 });
