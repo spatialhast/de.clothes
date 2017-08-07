@@ -242,7 +242,7 @@ function loadGeoJSONStoreData() {
 
 	setTimeout(function () {
 		updateStoreLayers(defaultState);
-	}, 500);
+	}, 1400);
 };
 
 loadGeoJSONStoreData();
