@@ -10,7 +10,7 @@ var map = L.map('map', {
 map.doubleClickZoom.disable();
 
 var zoomControl = L.control.zoom({
-	position: "topleft"
+	position: 'topleft'
 }).addTo(map);
 
 var layerOSM = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -91,7 +91,10 @@ var mcg = L.markerClusterGroup({
 	layerIkeaGroup = L.featureGroup.subGroup(mcg),
 	// Sports Club
 	layerMrsSportyGroup = L.featureGroup.subGroup(mcg),
-	layerMcFitGroup = L.featureGroup.subGroup(mcg);
+	layerMcFitGroup = L.featureGroup.subGroup(mcg),
+	// Food Retailer
+	layerReweGroup = L.featureGroup.subGroup(mcg),
+	layerEdekaGroup = L.featureGroup.subGroup(mcg);
 //layerDeutschePostGroup = L.featureGroup.subGroup(mcg)
 
 mcg.addTo(map);
@@ -129,7 +132,10 @@ var featureCount = {
 	"layerIkea": [0, 0],
 	// Sports Club
 	"layerMrsSporty": [0, 0],
-	"layerMcFit": [0, 0]
+	"layerMcFit": [0, 0],
+	// Food Retailer
+	"layerRewe": [0, 0],
+	"layerEdeka": [0, 0]
 	//"layerDeutschePost": [0, 0]
 };
 
@@ -158,8 +164,9 @@ var layerKiKData = {}, // Clothing
 	layerTigerStoreData = {},
 	layerIkeaData = {},
 	layerMrsSportyData = {}, // Sports Club
-	layerMcFitData = {};
-
+	layerMcFitData = {},
+	layerReweData = {}, // Food Retailer
+	layerEdekaData = {};
 
 function loadGeoJSONStoreData() {
 	// Clothing
@@ -239,6 +246,13 @@ function loadGeoJSONStoreData() {
 	$.getJSON("data/mcfit.geojson", function (data) {
 		layerMcFitData = data;
 	});
+	// Food Retailer
+	$.getJSON("data/rewe.geojson", function (data) {
+		layerReweData = data;
+	});
+	$.getJSON("data/edeka.geojson", function (data) {
+		layerEdekaData = data;
+	});
 
 	setTimeout(function () {
 		updateStoreLayers(defaultState);
@@ -278,6 +292,9 @@ function updateStoreLayers(state) {
 	// Sports Club
 	featureCount["layerMrsSporty"][0] = 0;
 	featureCount["layerMcFit"][0] = 0;
+	// Food Retailer
+	featureCount["layerRewe"][0] = 0;
+	featureCount["layerEdeka"][0] = 0;
 
 	// Clothing
 	var layerKiK = L.geoJson(layerKiKData, {
@@ -743,8 +760,8 @@ function updateStoreLayers(state) {
 	});
 	layerIkeaGroup.clearLayers();
 	layerIkeaGroup.addLayer(layerIkea);
-	// Sports Club
 
+	// Sports Club
 	var layerMrsSporty = L.geoJson(layerMrsSportyData, {
 		filter: function (feature, layer) {
 			return feature.properties.sname === state;
@@ -788,8 +805,52 @@ function updateStoreLayers(state) {
 	layerMcFitGroup.clearLayers();
 	layerMcFitGroup.addLayer(layerMcFit);
 
-};
 
+	// Food Retailer
+	var layerRewe = L.geoJson(layerReweData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/rewe.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerRewe"][0]++;
+		}
+	});
+
+	layerReweGroup.clearLayers();
+	layerReweGroup.addLayer(layerRewe);
+
+	var layerEdeka = L.geoJson(layerEdekaData, {
+		filter: function (feature, layer) {
+			return feature.properties.sname === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/edeka.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerEdeka"][0]++;
+		}
+	});
+	layerEdekaGroup.clearLayers();
+	layerEdekaGroup.addLayer(layerEdeka);
+
+};
 
 /*
 var layerDeutschePost = L.geoJson(layerDeutschePostData, {
@@ -859,6 +920,10 @@ var overlayMaps = {
 	"Sports Club <span id='sport_club_total'></span>": {
 		"<img src='icons/mrssporty.png' style='height: 16px'> Mrs. Sporty <span id='counter_mrssporty'></span>": layerMrsSportyGroup,
 		"<img src='icons/mcfit.png' style='height: 16px'> McFit <span id='counter_mcfit'></span>": layerMcFitGroup
+	},
+	"Food Retailer <span id='food_retailer_total'></span>": {
+		"<img src='icons/rewe.png' style='height: 16px'> Rewe <span id='counter_rewe'></span>": layerReweGroup,
+		"<img src='icons/edeka.png' style='height: 16px'> Edeka <span id='counter_edeka'></span>": layerEdekaGroup
 	}
 	// <br><hr>Total: <span id='counter_total'></span>
 	// "<img src='icons/deutschepost.png' style='height: 16px'> Deutsche Post <span id='counter_deutschepost'></span>": layerDeutschePostGroup
@@ -907,12 +972,14 @@ var allMapLayers = {
 	"ik": layerIkeaGroup,
 
 	"my": layerMrsSportyGroup,
-	"mf": layerMcFitGroup
+	"mf": layerMcFitGroup,
+
+	"re": layerReweGroup,
+	"ed": layerEdekaGroup
 
 	//"dp": layerDeutschePostGroup
 };
 L.hash(map, allMapLayers);
-
 
 function addAllLayers() {
 	layerGoogleRoadsCustom.addTo(map);
@@ -945,6 +1012,9 @@ function addAllLayers() {
 
 	layerMrsSportyGroup.addTo(map);
 	layerMcFitGroup.addTo(map);
+
+	layerReweGroup.addTo(map);
+	layerEdekaGroup.addTo(map);
 
 	//layerDeutschePostGroup.addTo(map);
 };
@@ -987,6 +1057,9 @@ map.on("overlayadd overlayremove moveend zoomend", function (e) {
 		};
 		if (!map.hasLayer(layerMrsSportyGroup) && !map.hasLayer(layerMcFitGroup)) {
 			$("#leaflet-control-layers-group-5 > label.leaflet-control-layers-group-label > input").prop("checked", false);
+		};
+		if (!map.hasLayer(layerReweGroup) && !map.hasLayer(layerEdekaGroup)) {
+			$("#leaflet-control-layers-group-6 > label.leaflet-control-layers-group-label > input").prop("checked", false);
 		};
 	};
 });
@@ -1063,6 +1136,9 @@ function checkLayerGroupAdd() {
 	if (map.hasLayer(layerMrsSportyGroup) || map.hasLayer(layerMcFitGroup)) {
 		$("#leaflet-control-layers-group-5 > label.leaflet-control-layers-group-label > input").prop("checked", true);
 	};
+	if (map.hasLayer(layerReweGroup) || map.hasLayer(layerEdekaGroup)) {
+		$("#leaflet-control-layers-group-6 > label.leaflet-control-layers-group-label > input").prop("checked", true);
+	};
 };
 
 checkLayerGroupAdd();
@@ -1104,6 +1180,9 @@ function getFeatureCount() {
 	var total_mrssporty = featureCount["layerMrsSporty"][0];
 	var total_mcfit = featureCount["layerMcFit"][0];
 
+	var total_rewe = featureCount["layerRewe"][0];
+	var total_edeka = featureCount["layerEdeka"][0];
+
 	//var total_deutschepost = featureCount["layerDeutschePost"][0];
 	//var total_deutschepost = 0;
 
@@ -1112,6 +1191,7 @@ function getFeatureCount() {
 	var discounter_total = 0;
 	var accessories_total = 0;
 	var sport_club_total = 0;
+	var food_retailer_total = 0;
 
 	// Clothing
 	featureCount["layerKiK"][1] = 0;
@@ -1142,13 +1222,16 @@ function getFeatureCount() {
 	// Sports Club
 	featureCount["layerMrsSporty"][1] = 0;
 	featureCount["layerMcFit"][1] = 0;
-
+	// Food Retailer
+	featureCount["layerRewe"][1] = 0;
+	featureCount["layerEdeka"][1] = 0;
 
 	clothing_total = total_kik + total_zeeman + total_takko + total_nkd + total_awg;
 	dollarstore_total = total_action + total_macgeiz + total_tedi + total_blackde + total_euroshop + total_woolworth + total_pfennigpfeifer;
 	discounter_total = total_kaufland + total_lidl + total_aldi + total_norma + total_penny + total_nettomarkendiscount + total_nettoschwarz;
 	accessories_total = total_xenos + total_tigerstore + total_ikea;
 	sport_club_total = total_mrssporty + total_mcfit;
+	food_retailer_total = total_rewe + total_edeka;
 
 	if (map.hasLayer(layerKiKGroup)) {
 		layerKiKGroup.eachLayer(function (e) {
@@ -1466,6 +1549,34 @@ function getFeatureCount() {
 		featureCount["layerMcFit"][1] = 0;
 	};
 
+
+	if (map.hasLayer(layerReweGroup)) {
+		layerReweGroup.eachLayer(function (e) {
+			featureCount["layerRewe"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerRewe"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerRewe"][1] = 0;
+	};
+
+
+	if (map.hasLayer(layerEdekaGroup)) {
+		layerEdekaGroup.eachLayer(function (e) {
+			featureCount["layerEdeka"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerEdeka"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerEdeka"][1] = 0;
+	};
+
 	/*
 		if (map.hasLayer(layerDeutschePostGroup)) {
 			layerDeutschePostGroup.eachLayer(function (e) {
@@ -1510,6 +1621,9 @@ function getFeatureCount() {
 	var view_mrssporty = featureCount["layerMrsSporty"][1];
 	var view_mcfit = featureCount["layerMcFit"][1];
 
+	var view_rewe = featureCount["layerRewe"][1];
+	var view_edeka = featureCount["layerEdeka"][1];
+
 	//var view_deutschepost = featureCount["layerDeutschePost"][1];
 	//var view_deutschepost = 0;
 
@@ -1518,6 +1632,7 @@ function getFeatureCount() {
 	var discounter_view = 0;
 	var accessories_view = 0;
 	var sport_club_view = 0;
+	var food_retailer_view = 0;
 
 
 	clothing_view = view_kik + view_zeeman + view_takko + view_nkd + view_awg;
@@ -1525,6 +1640,7 @@ function getFeatureCount() {
 	discounter_view = view_kaufland + view_lidl + view_aldi + view_norma + view_penny + view_nettomarkendiscount + view_nettoschwarz;
 	accessories_view = view_xenos + view_tigerstore + view_ikea;
 	sport_club_view = view_mrssporty + view_mcfit;
+	food_retailer_view = view_rewe + view_edeka;
 
 	$('#counter_kik').text('(' + view_kik + '/' + total_kik + ')');
 	$('#counter_zeeman').text('(' + view_zeeman + '/' + total_zeeman + ')');
@@ -1555,6 +1671,9 @@ function getFeatureCount() {
 	$('#counter_mrssporty').text('(' + view_mrssporty + '/' + total_mrssporty + ')');
 	$('#counter_mcfit').text('(' + view_mcfit + '/' + total_mcfit + ')');
 
+	$('#counter_rewe').text('(' + view_rewe + '/' + total_rewe + ')');
+	$('#counter_edeka').text('(' + view_edeka + '/' + total_edeka + ')');
+
 	//$('#counter_deutschepost').text('(' + view_deutschepost + '/' + total_deutschepost + ')');
 
 	$('#clothing_total').text('(' + clothing_view + '/' + clothing_total + ')');
@@ -1562,6 +1681,7 @@ function getFeatureCount() {
 	$('#discounter_total').text('(' + discounter_view + '/' + discounter_total + ')');
 	$('#accessories_total').text('(' + accessories_view + '/' + accessories_total + ')');
 	$('#sport_club_total').text('(' + sport_club_view + '/' + sport_club_total + ')');
+	$('#food_retailer_total').text('(' + food_retailer_view + '/' + food_retailer_total + ')');
 
 };
 
