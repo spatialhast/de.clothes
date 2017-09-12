@@ -1032,6 +1032,18 @@ var iconClusterControl = L.easyButton('<strong id="cluster-status-element">D</st
 });
 iconClusterControl.addTo(map);
 
+function openInNewTab(url) {
+	var win = window.open(url, '_blank');
+	win.focus();
+};
+
+L.easyButton('<strong id="icon-size-element">S</strong>', function () {
+	openInNewTab('index.html');
+}, 'Open map with states selector', {
+	position: 'topleft'
+}).addTo(map);
+
+
 // collapse layer groups
 var elems = document.getElementsByClassName("leaflet-control-layers-group group-collapsable");
 [].forEach.call(elems, function (el) {

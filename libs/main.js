@@ -1113,6 +1113,18 @@ var iconClusterControl = L.easyButton('<strong id="cluster-status-element">D</st
 });
 iconClusterControl.addTo(map);
 
+function openInNewTab(url) {
+	var win = window.open(url, '_blank');
+	win.focus();
+};
+
+L.easyButton('<strong id="icon-size-element">G</strong>', function () {
+	openInNewTab('index_all.html');
+}, 'Open map with all stores in Germany', {
+	position: 'topleft'
+}).addTo(map);
+
+
 // collapse layer groups
 var elems = document.getElementsByClassName("leaflet-control-layers-group group-collapsable");
 [].forEach.call(elems, function (el) {
