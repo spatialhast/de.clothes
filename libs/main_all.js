@@ -1016,7 +1016,7 @@ function iconSizeUpdate(size) {
 // cluster status control
 var clusterStatus = true;
 var iconClusterControl = L.easyButton('<strong id="cluster-status-element">D</strong>', function () {
-	if (clusterStatus && map.getZoom() >= 14) {
+	if (clusterStatus) {
 		mcg.disableClustering();
 		map.panTo(new L.LatLng(map.getCenter().lat, map.getCenter().lng + 0.000001));
 		$('#cluster-status-element').text('E');
