@@ -299,7 +299,7 @@ function updateStoreLayers(state) {
 	// Clothing
 	var layerKiK = L.geoJson(layerKiKData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -320,7 +320,7 @@ function updateStoreLayers(state) {
 
 	var layerZeeman = L.geoJson(layerZeemanData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -341,7 +341,7 @@ function updateStoreLayers(state) {
 
 	var layerTakko = L.geoJson(layerTakkoData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -362,7 +362,7 @@ function updateStoreLayers(state) {
 
 	var layerNKD = L.geoJson(layerNKDData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -383,7 +383,7 @@ function updateStoreLayers(state) {
 
 	var layerAWG = L.geoJson(layerAWGData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -405,7 +405,7 @@ function updateStoreLayers(state) {
 	// Dollarstore
 	var layerAction = L.geoJson(layerActionData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -419,6 +419,16 @@ function updateStoreLayers(state) {
 		},
 		onEachFeature: function onEachFeature(feature, layer) {
 			featureCount["layerAction"][0]++;
+			if (feature.properties) {
+				var filiale = feature.properties.filiale ? '<b>Filiale: </b>' + feature.properties.filiale + '<br>' : '';
+				var name = feature.properties.name ? '<b>Name: </b>' + feature.properties.name + '<br>' : '';
+				var city = feature.properties.city ? '<b>City: </b>' + feature.properties.city + '<br>' : '';
+				var address = feature.properties.address ? '<b>Address: </b>' + feature.properties.address + '<br>' : '';
+				var postal = feature.properties.postal ? '<b>Postal: </b>' + feature.properties.postal + '<br>' : '';
+				var state = feature.properties.state ? '<b>State: </b>' + feature.properties.state + '<br>' : '';
+				var content = filiale + name + city + address + postal + state;
+				layer.bindPopup(content);
+			};
 		}
 	});
 	layerActionGroup.clearLayers();
@@ -426,7 +436,7 @@ function updateStoreLayers(state) {
 
 	var layerMacgeiz = L.geoJson(layerMacgeizData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -447,7 +457,7 @@ function updateStoreLayers(state) {
 
 	var layerTedi = L.geoJson(layerTediData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -468,7 +478,7 @@ function updateStoreLayers(state) {
 
 	var layerBlackde = L.geoJson(layerBlackdeData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -482,6 +492,16 @@ function updateStoreLayers(state) {
 		},
 		onEachFeature: function onEachFeature(feature, layer) {
 			featureCount["layerBlackde"][0]++;
+			if (feature.properties) {
+				var filiale = feature.properties.filiale ? '<b>Filiale: </b>' + feature.properties.filiale + '<br>' : '';
+				var name = feature.properties.name ? '<b>Name: </b>' + feature.properties.name + '<br>' : '';
+				var city = feature.properties.city ? '<b>City: </b>' + feature.properties.city + '<br>' : '';
+				var address = feature.properties.address ? '<b>Address: </b>' + feature.properties.address + '<br>' : '';
+				var postal = feature.properties.postal ? '<b>Postal: </b>' + feature.properties.postal + '<br>' : '';
+				var state = feature.properties.state ? '<b>State: </b>' + feature.properties.state + '<br>' : '';
+				var content = filiale + name + city + address + postal + state;
+				layer.bindPopup(content);
+			};
 		}
 	});
 	layerBlackdeGroup.clearLayers();
@@ -489,7 +509,7 @@ function updateStoreLayers(state) {
 
 	var layerEuroshop = L.geoJson(layerEuroshopData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -510,7 +530,7 @@ function updateStoreLayers(state) {
 
 	var layerWoolworth = L.geoJson(layerWoolworthData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -531,7 +551,7 @@ function updateStoreLayers(state) {
 
 	var layerPfennigPfeifer = L.geoJson(layerPfennigPfeiferData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -553,7 +573,7 @@ function updateStoreLayers(state) {
 	// Discounter
 	var layerKaufland = L.geoJson(layerKauflandData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -574,7 +594,7 @@ function updateStoreLayers(state) {
 
 	var layerLidl = L.geoJson(layerLidlData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -595,7 +615,7 @@ function updateStoreLayers(state) {
 
 	var layerAldi = L.geoJson(layerAldiData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -616,7 +636,7 @@ function updateStoreLayers(state) {
 
 	var layerNorma = L.geoJson(layerNormaData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -637,7 +657,7 @@ function updateStoreLayers(state) {
 
 	var layerPenny = L.geoJson(layerPennyData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -658,7 +678,7 @@ function updateStoreLayers(state) {
 
 	var layerNettoSchwarz = L.geoJson(layerNettoSchwarzData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -679,7 +699,7 @@ function updateStoreLayers(state) {
 	// Accessoires 
 	var layerXenos = L.geoJson(layerXenosData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -700,7 +720,7 @@ function updateStoreLayers(state) {
 
 	var layerTigerStore = L.geoJson(layerTigerStoreData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -721,7 +741,7 @@ function updateStoreLayers(state) {
 
 	var layerIkea = L.geoJson(layerIkeaData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -743,7 +763,7 @@ function updateStoreLayers(state) {
 	// Sports Club
 	var layerMrsSporty = L.geoJson(layerMrsSportyData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -765,7 +785,7 @@ function updateStoreLayers(state) {
 
 	var layerMcFit = L.geoJson(layerMcFitData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -788,7 +808,7 @@ function updateStoreLayers(state) {
 	// Food Retailer
 	var layerRewe = L.geoJson(layerReweData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -802,6 +822,16 @@ function updateStoreLayers(state) {
 		},
 		onEachFeature: function onEachFeature(feature, layer) {
 			featureCount["layerRewe"][0]++;
+			if (feature.properties) {
+				var filiale = feature.properties.filiale ? '<b>Filiale: </b>' + feature.properties.filiale + '<br>' : '';
+				var name = feature.properties.name ? '<b>Name: </b>' + feature.properties.name + '<br>' : '';
+				var city = feature.properties.city ? '<b>City: </b>' + feature.properties.city + '<br>' : '';
+				var address = feature.properties.address ? '<b>Address: </b>' + feature.properties.address + '<br>' : '';
+				var postal = feature.properties.postal ? '<b>Postal: </b>' + feature.properties.postal + '<br>' : '';
+				var state = feature.properties.state ? '<b>State: </b>' + feature.properties.state + '<br>' : '';
+				var content = filiale + name + city + address + postal + state;
+				layer.bindPopup(content);
+			};
 		}
 	});
 
@@ -810,7 +840,7 @@ function updateStoreLayers(state) {
 
 	var layerEdeka = L.geoJson(layerEdekaData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -824,6 +854,16 @@ function updateStoreLayers(state) {
 		},
 		onEachFeature: function onEachFeature(feature, layer) {
 			featureCount["layerEdeka"][0]++;
+			if (feature.properties) {
+				var filiale = feature.properties.filiale ? '<b>Filiale: </b>' + feature.properties.filiale + '<br>' : '';
+				var name = feature.properties.name ? '<b>Name: </b>' + feature.properties.name + '<br>' : '';
+				var city = feature.properties.city ? '<b>City: </b>' + feature.properties.city + '<br>' : '';
+				var address = feature.properties.address ? '<b>Address: </b>' + feature.properties.address + '<br>' : '';
+				var postal = feature.properties.postal ? '<b>Postal: </b>' + feature.properties.postal + '<br>' : '';
+				var state = feature.properties.state ? '<b>State: </b>' + feature.properties.state + '<br>' : '';
+				var content = filiale + name + city + address + postal + state;
+				layer.bindPopup(content);
+			};
 		}
 	});
 	layerEdekaGroup.clearLayers();
@@ -831,7 +871,7 @@ function updateStoreLayers(state) {
 
 	var layerNettoMarkendiscount = L.geoJson(layerNettoMarkendiscountData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
@@ -855,7 +895,7 @@ function updateStoreLayers(state) {
 /*
 var layerDeutschePost = L.geoJson(layerDeutschePostData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state;
+			return feature.properties.state === state;
 		},
 	pointToLayer: function (feature, latlng) {
 		return L.marker(latlng, {
@@ -1712,7 +1752,7 @@ function selectByState(state) {
 	layerStatesGroup.clearLayers();
 	var layerStates = L.geoJson(statesData, {
 		filter: function (feature, layer) {
-			return feature.properties.sname === state
+			return feature.properties.state === state
 		},
 		style: function (feature) {
 			return {

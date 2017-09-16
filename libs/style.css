@@ -25,3 +25,11 @@ label {
     left: 50px;
     position: absolute;
 }
+
+.leaflet-popup-content-wrapper {
+    border-radius: 3px;
+}
+
+.leaflet-popup-content {
+    margin: 5px 20px 5px 5px;
+}

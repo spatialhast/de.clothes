@@ -19,3 +19,11 @@ label {
     margin-bottom: 1px;
     font-weight: normal;
 }
+
+.leaflet-popup-content-wrapper {
+    border-radius: 3px;
+}
+
+.leaflet-popup-content {
+    margin: 5px 20px 5px 5px;
+}
