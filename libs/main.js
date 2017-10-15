@@ -80,7 +80,8 @@ var mcg = L.markerClusterGroup({
 	// Discounter
 	layerKauflandGroup = L.featureGroup.subGroup(mcg),
 	layerLidlGroup = L.featureGroup.subGroup(mcg),
-	layerAldiGroup = L.featureGroup.subGroup(mcg),
+	layerAldiNordGroup = L.featureGroup.subGroup(mcg),
+	layerAldiSuedGroup = L.featureGroup.subGroup(mcg),
 	layerNormaGroup = L.featureGroup.subGroup(mcg),
 	layerPennyGroup = L.featureGroup.subGroup(mcg),
 	layerNettoSchwarzGroup = L.featureGroup.subGroup(mcg),
@@ -121,7 +122,8 @@ var featureCount = {
 	// Discounter
 	"layerKaufland": [0, 0],
 	"layerLidl": [0, 0],
-	"layerAldi": [0, 0],
+	"layerAldiNord": [0, 0],
+	"layerAldiSued": [0, 0],
 	"layerNorma": [0, 0],
 	"layerPenny": [0, 0],
 	"layerNettoSchwarz": [0, 0],
@@ -155,7 +157,8 @@ var layerKiKData = {}, // Clothing
 	layerPfennigPfeiferData = {},
 	layerKauflandData = {}, // Discounter
 	layerLidlData = {},
-	layerAldiData = {},
+	layerAldiNordData = {},
+	layerAldiSuedData = {},
 	layerNormaData = {},
 	layerPennyData = {},
 	layerNettoSchwarzData = {},
@@ -214,8 +217,11 @@ function loadGeoJSONStoreData() {
 	$.getJSON("data/lidl.geojson", function (data) {
 		layerLidlData = data;
 	});
-	$.getJSON("data/aldi.geojson", function (data) {
-		layerAldiData = data;
+	$.getJSON("data/aldinord.geojson", function (data) {
+		layerAldiNordData = data;
+	});	
+	$.getJSON("data/aldisued.geojson", function (data) {
+		layerAldiSuedData = data;
 	});
 	$.getJSON("data/norma.geojson", function (data) {
 		layerNormaData = data;
@@ -280,7 +286,8 @@ function updateStoreLayers(state) {
 	// Discounter
 	featureCount["layerKaufland"][0] = 0;
 	featureCount["layerLidl"][0] = 0;
-	featureCount["layerAldi"][0] = 0;
+	featureCount["layerAldiNord"][0] = 0;
+	featureCount["layerAldiSued"][0] = 0;
 	featureCount["layerNorma"][0] = 0;
 	featureCount["layerPenny"][0] = 0;
 	featureCount["layerNettoSchwarz"][0] = 0;
@@ -613,14 +620,14 @@ function updateStoreLayers(state) {
 	layerLidlGroup.clearLayers();
 	layerLidlGroup.addLayer(layerLidl);
 
-	var layerAldi = L.geoJson(layerAldiData, {
+	var layerAldiNord = L.geoJson(layerAldiNordData, {
 		filter: function (feature, layer) {
 			return feature.properties.state === state;
 		},
 		pointToLayer: function (feature, latlng) {
 			return L.marker(latlng, {
 				icon: L.icon({
-					iconUrl: 'icons/aldi.png',
+					iconUrl: 'icons/aldinord.png',
 					iconSize: iconSize,
 					iconAnchor: iconAnchor
 				}),
@@ -628,11 +635,42 @@ function updateStoreLayers(state) {
 			});
 		},
 		onEachFeature: function onEachFeature(feature, layer) {
-			featureCount["layerAldi"][0]++;
+			featureCount["layerAldiNord"][0]++;
 		}
 	});
-	layerAldiGroup.clearLayers();
-	layerAldiGroup.addLayer(layerAldi);
+	layerAldiNordGroup.clearLayers();
+	layerAldiNordGroup.addLayer(layerAldiNord);
+
+	var layerAldiSued = L.geoJson(layerAldiSuedData, {
+		filter: function (feature, layer) {
+			return feature.properties.state === state;
+		},
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {
+				icon: L.icon({
+					iconUrl: 'icons/aldisued.png',
+					iconSize: iconSize,
+					iconAnchor: iconAnchor
+				}),
+				riseOnHover: true
+			});
+		},
+		onEachFeature: function onEachFeature(feature, layer) {
+			featureCount["layerAldiSued"][0]++;
+			if (feature.properties) {
+				var filiale = feature.properties.filiale ? '<b>Filiale: </b>' + feature.properties.filiale + '<br>' : '';
+				var name = feature.properties.name ? '<b>Name: </b>' + feature.properties.name + '<br>' : '';
+				var city = feature.properties.city ? '<b>City: </b>' + feature.properties.city + '<br>' : '';
+				var address = feature.properties.address ? '<b>Address: </b>' + feature.properties.address + '<br>' : '';
+				var postal = feature.properties.postal ? '<b>Postal: </b>' + feature.properties.postal + '<br>' : '';
+				var state = feature.properties.state ? '<b>State: </b>' + feature.properties.state + '<br>' : '';
+				var content = filiale + name + city + address + postal + state;
+				layer.bindPopup(content);
+			};
+		}
+	});
+	layerAldiSuedGroup.clearLayers();
+	layerAldiSuedGroup.addLayer(layerAldiSued);
 
 	var layerNorma = L.geoJson(layerNormaData, {
 		filter: function (feature, layer) {
@@ -946,7 +984,8 @@ var overlayMaps = {
 	"Discounter <span id='discounter_total'></span>": {
 		"<img src='icons/kaufland.png' style='height: 16px'> Kaufland <span id='counter_kaufland'></span>": layerKauflandGroup,
 		"<img src='icons/lidl.png' style='height: 16px'> Lidl <span id='counter_lidl'></span>": layerLidlGroup,
-		"<img src='icons/aldi.png' style='height: 16px'> Aldi <span id='counter_aldi'></span>": layerAldiGroup,
+		"<img src='icons/aldinord.png' style='height: 16px'> Aldi Nord <span id='counter_aldinord'></span>": layerAldiNordGroup,
+		"<img src='icons/aldisued.png' style='height: 16px'> Aldi Sued <span id='counter_aldisued'></span>": layerAldiSuedGroup,
 		"<img src='icons/norma.png' style='height: 16px'> Norma <span id='counter_norma'></span>": layerNormaGroup,
 		"<img src='icons/penny.png' style='height: 16px'> Penny <span id='counter_penny'></span>": layerPennyGroup,
 		"<img src='icons/nettoschwarz.png' style='height: 16px'> Netto Schwarz <span id='counter_nettoschwarz'></span>": layerNettoSchwarzGroup
@@ -1001,7 +1040,8 @@ var allMapLayers = {
 
 	"ka": layerKauflandGroup,
 	"li": layerLidlGroup,
-	"al": layerAldiGroup,
+	"an": layerAldiNordGroup,
+	"as": layerAldiSuedGroup,
 	"no": layerNormaGroup,
 	"pe": layerPennyGroup,
 	"ns": layerNettoSchwarzGroup,
@@ -1040,7 +1080,8 @@ function addAllLayers() {
 
 	layerKauflandGroup.addTo(map);
 	layerLidlGroup.addTo(map);
-	layerAldiGroup.addTo(map);
+	layerAldiNordGroup.addTo(map);
+	layerAldiSuedGroup.addTo(map);
 	layerNormaGroup.addTo(map);
 	layerPennyGroup.addTo(map);
 	layerNettoSchwarzGroup.addTo(map);
@@ -1089,7 +1130,7 @@ map.on("overlayadd overlayremove moveend zoomend", function (e) {
 		if (!map.hasLayer(layerActionGroup) && !map.hasLayer(layerMacgeizGroup) && !map.hasLayer(layerTediGroup) && !map.hasLayer(layerBlackdeGroup) && !map.hasLayer(layerEuroshopGroup) && !map.hasLayer(layerWoolworthGroup) && !map.hasLayer(layerPfennigPfeiferGroup)) {
 			$("#leaflet-control-layers-group-2 > label.leaflet-control-layers-group-label > input").prop("checked", false);
 		};
-		if (!map.hasLayer(layerKauflandGroup) && !map.hasLayer(layerLidlGroup) && !map.hasLayer(layerAldiGroup) && !map.hasLayer(layerNormaGroup) && !map.hasLayer(layerPennyGroup) && !map.hasLayer(layerNettoSchwarzGroup)) {
+		if (!map.hasLayer(layerKauflandGroup) && !map.hasLayer(layerLidlGroup) && !map.hasLayer(layerAldiNordGroup) && !map.hasLayer(layerAldiSuedGroup) && !map.hasLayer(layerNormaGroup) && !map.hasLayer(layerPennyGroup) && !map.hasLayer(layerNettoSchwarzGroup)) {
 			$("#leaflet-control-layers-group-3 > label.leaflet-control-layers-group-label > input").prop("checked", false);
 		};
 		if (!map.hasLayer(layerXenosGroup) && !map.hasLayer(layerTigerStoreGroup) && !map.hasLayer(layerIkeaGroup)) {
@@ -1179,7 +1220,7 @@ function checkLayerGroupAdd() {
 	if (map.hasLayer(layerActionGroup) || map.hasLayer(layerMacgeizGroup) || map.hasLayer(layerTediGroup) || map.hasLayer(layerBlackdeGroup) || map.hasLayer(layerEuroshopGroup) || map.hasLayer(layerWoolworthGroup) || map.hasLayer(layerPfennigPfeiferGroup)) {
 		$("#leaflet-control-layers-group-2 > label.leaflet-control-layers-group-label > input").prop("checked", true);
 	};
-	if (map.hasLayer(layerKauflandGroup) || map.hasLayer(layerLidlGroup) || map.hasLayer(layerAldiGroup) || map.hasLayer(layerNormaGroup) || map.hasLayer(layerPennyGroup) || map.hasLayer(layerNettoSchwarzGroup)) {
+	if (map.hasLayer(layerKauflandGroup) || map.hasLayer(layerLidlGroup) || map.hasLayer(layerAldiNordGroup) || map.hasLayer(layerAldiSuedGroup) || map.hasLayer(layerNormaGroup) || map.hasLayer(layerPennyGroup) || map.hasLayer(layerNettoSchwarzGroup)) {
 		$("#leaflet-control-layers-group-3 > label.leaflet-control-layers-group-label > input").prop("checked", true);
 	};
 	if (map.hasLayer(layerXenosGroup) || map.hasLayer(layerTigerStoreGroup) || map.hasLayer(layerIkeaGroup)) {
@@ -1219,7 +1260,8 @@ function getFeatureCount() {
 
 	var total_kaufland = featureCount["layerKaufland"][0];
 	var total_lidl = featureCount["layerLidl"][0];
-	var total_aldi = featureCount["layerAldi"][0];
+	var total_aldinord = featureCount["layerAldiNord"][0];
+	var total_aldisued = featureCount["layerAldiSued"][0];
 	var total_norma = featureCount["layerNorma"][0];
 	var total_penny = featureCount["layerPenny"][0];
 	var total_nettoschwarz = featureCount["layerNettoSchwarz"][0];
@@ -1262,7 +1304,8 @@ function getFeatureCount() {
 	// Discounter
 	featureCount["layerKaufland"][1] = 0;
 	featureCount["layerLidl"][1] = 0;
-	featureCount["layerAldi"][1] = 0;
+	featureCount["layerAldiNord"][1] = 0;
+	featureCount["layerAldiSued"][1] = 0;
 	featureCount["layerNorma"][1] = 0;
 	featureCount["layerPenny"][1] = 0;
 	featureCount["layerNettoSchwarz"][1] = 0;
@@ -1280,7 +1323,7 @@ function getFeatureCount() {
 
 	clothing_total = total_kik + total_zeeman + total_takko + total_nkd + total_awg;
 	dollarstore_total = total_action + total_macgeiz + total_tedi + total_blackde + total_euroshop + total_woolworth + total_pfennigpfeifer;
-	discounter_total = total_kaufland + total_lidl + total_aldi + total_norma + total_penny + total_nettoschwarz;
+	discounter_total = total_kaufland + total_lidl + total_aldinord + total_aldisued + total_norma + total_penny + total_nettoschwarz;
 	accessories_total = total_xenos + total_tigerstore + total_ikea;
 	sport_club_total = total_mrssporty + total_mcfit;
 	food_retailer_total = total_rewe + total_edeka + total_nettomarkendiscount;
@@ -1468,19 +1511,32 @@ function getFeatureCount() {
 		featureCount["layerLidl"][1] = 0;
 	};
 
-	if (map.hasLayer(layerAldiGroup)) {
-		layerAldiGroup.eachLayer(function (e) {
-			featureCount["layerAldi"][1] = 0;
+	if (map.hasLayer(layerAldiNordGroup)) {
+		layerAldiNordGroup.eachLayer(function (e) {
+			featureCount["layerAldiNord"][1] = 0;
 			e.eachLayer(function (layer) {
 				if (map.getBounds().contains(layer.getLatLng())) {
-					featureCount["layerAldi"][1]++;
+					featureCount["layerAldiNord"][1]++;
 				};
 			});
 		});
 	} else {
-		featureCount["layerAldi"][1] = 0;
+		featureCount["layerAldiNord"][1] = 0;
 	};
 
+	if (map.hasLayer(layerAldiSuedGroup)) {
+		layerAldiSuedGroup.eachLayer(function (e) {
+			featureCount["layerAldiSued"][1] = 0;
+			e.eachLayer(function (layer) {
+				if (map.getBounds().contains(layer.getLatLng())) {
+					featureCount["layerAldiSued"][1]++;
+				};
+			});
+		});
+	} else {
+		featureCount["layerAldiSued"][1] = 0;
+	};
+	
 	if (map.hasLayer(layerNormaGroup)) {
 		layerNormaGroup.eachLayer(function (e) {
 			featureCount["layerNorma"][1] = 0;
@@ -1660,7 +1716,8 @@ function getFeatureCount() {
 
 	var view_kaufland = featureCount["layerKaufland"][1];
 	var view_lidl = featureCount["layerLidl"][1];
-	var view_aldi = featureCount["layerAldi"][1];
+	var view_aldinord = featureCount["layerAldiNord"][1];
+	var view_aldisued = featureCount["layerAldiSued"][1];
 	var view_norma = featureCount["layerNorma"][1];
 	var view_penny = featureCount["layerPenny"][1];
 	var view_nettoschwarz = featureCount["layerNettoSchwarz"][1];
@@ -1689,7 +1746,7 @@ function getFeatureCount() {
 
 	clothing_view = view_kik + view_zeeman + view_takko + view_nkd + view_awg;
 	dollarstore_view = view_action + view_macgeiz + view_tedi + view_blackde + view_euroshop + view_woolworth + view_pfennigpfeifer;
-	discounter_view = view_kaufland + view_lidl + view_aldi + view_norma + view_penny + view_nettoschwarz;
+	discounter_view = view_kaufland + view_lidl + view_aldinord + view_aldisued + view_norma + view_penny + view_nettoschwarz;
 	accessories_view = view_xenos + view_tigerstore + view_ikea;
 	sport_club_view = view_mrssporty + view_mcfit;
 	food_retailer_view = view_rewe + view_edeka + view_nettomarkendiscount;
@@ -1710,7 +1767,8 @@ function getFeatureCount() {
 
 	$('#counter_kaufland').text('(' + view_kaufland + '/' + total_kaufland + ')');
 	$('#counter_lidl').text('(' + view_lidl + '/' + total_lidl + ')');
-	$('#counter_aldi').text('(' + view_aldi + '/' + total_aldi + ')');
+	$('#counter_aldinord').text('(' + view_aldinord + '/' + total_aldinord + ')');
+	$('#counter_aldisued').text('(' + view_aldisued + '/' + total_aldisued + ')');
 	$('#counter_norma').text('(' + view_norma + '/' + total_norma + ')');
 	$('#counter_penny').text('(' + view_penny + '/' + total_penny + ')');
 	$('#counter_nettoschwarz').text('(' + view_nettoschwarz + '/' + total_nettoschwarz + ')');
