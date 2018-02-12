@@ -433,7 +433,8 @@ function updateStoreLayers(state) {
 				var address = feature.properties.address ? '<b>Address: </b>' + feature.properties.address + '<br>' : '';
 				var postal = feature.properties.postal ? '<b>Postal: </b>' + feature.properties.postal + '<br>' : '';
 				var state = feature.properties.state ? '<b>State: </b>' + feature.properties.state + '<br>' : '';
-				var content = filiale + name + city + address + postal + state;
+				var updated = feature.properties.downloaded ? '<b>Updated: </b>' + feature.properties.downloaded + '<br>' : '';
+				var content = filiale + name + city + address + postal + state + updated;
 				layer.bindPopup(content);
 			};
 		}
@@ -478,6 +479,17 @@ function updateStoreLayers(state) {
 		},
 		onEachFeature: function onEachFeature(feature, layer) {
 			featureCount["layerTedi"][0]++;
+			if (feature.properties) {
+				var filiale = feature.properties.filiale ? '<b>Filiale: </b>' + feature.properties.filiale + '<br>' : '';
+				var name = feature.properties.name ? '<b>Name: </b>' + feature.properties.name + '<br>' : '';
+				var city = feature.properties.city ? '<b>City: </b>' + feature.properties.city + '<br>' : '';
+				var address = feature.properties.address ? '<b>Address: </b>' + feature.properties.address + '<br>' : '';
+				var postal = feature.properties.postal ? '<b>Postal: </b>' + feature.properties.postal + '<br>' : '';
+				var state = feature.properties.state ? '<b>State: </b>' + feature.properties.state + '<br>' : '';
+				var updated = feature.properties.downloaded ? '<b>Updated: </b>' + feature.properties.downloaded + '<br>' : '';
+				var content = filiale + name + city + address + postal + state + updated;
+				layer.bindPopup(content);
+			};
 		}
 	});
 	layerTediGroup.clearLayers();
@@ -506,7 +518,8 @@ function updateStoreLayers(state) {
 				var address = feature.properties.address ? '<b>Address: </b>' + feature.properties.address + '<br>' : '';
 				var postal = feature.properties.postal ? '<b>Postal: </b>' + feature.properties.postal + '<br>' : '';
 				var state = feature.properties.state ? '<b>State: </b>' + feature.properties.state + '<br>' : '';
-				var content = filiale + name + city + address + postal + state;
+				var updated = feature.properties.downloaded ? '<b>Updated: </b>' + feature.properties.downloaded + '<br>' : '';
+				var content = filiale + name + city + address + postal + state + updated;
 				layer.bindPopup(content);
 			};
 		}
