@@ -267,7 +267,6 @@ function loadGeoJSONStoreData() {
 
 loadGeoJSONStoreData();
 
-
 function updateStoreLayers(state) {
 	// Clothing
 	featureCount["layerKiK"][0] = 0;
