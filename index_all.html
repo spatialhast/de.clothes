@@ -7,10 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.png">
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="libs/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-select-1.13.10/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="libs/leaflet-1.5.1/leaflet.css" />
     <link rel="stylesheet" href="libs/leaflet.markercluster/MarkerCluster.css" />
     <link rel="stylesheet" href="libs/leaflet.markercluster/MarkerCluster.Default.css" />
     <link rel="stylesheet" href="libs/leaflet.easy-button/easy-button.css" />
@@ -22,17 +21,15 @@
 <body>
     <div id="map"></div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvj_sxJ3zvivCiYq9-oFisE7T3ZQtXzxo&language=en" async defer></script>
-    <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js"></script>
+    <script src="libs/jquery-3.2.1.min.js"></script>
+    <script src="libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="libs/bootstrap-select-1.13.10/js/bootstrap-select.min.js"></script>
+    <script src="libs/leaflet-1.5.1/leaflet.js"></script>
+    <script src="libs/Leaflet.GoogleMutant.js"></script>
     <script src="libs/leaflet.markercluster/leaflet.markercluster.js"></script>
-    <!--<script src="libs/leaflet.markercluster/leaflet.markercluster.layersupport.js"></script>-->
     <script src="libs/leaflet.markercluster/leaflet.markercluster.freezable.js"></script>
-    <script src="https://unpkg.com/leaflet.featuregroup.subgroup@1.0.2/dist/leaflet.featuregroup.subgroup.js"></script>
+    <script src="libs/leaflet.featuregroup.subgroup.js"></script>
     <script src="libs/leaflet.easy-button/easy-button.js"></script>
     <script src="libs/leaflet.groupedlayercontrol/leaflet.groupedlayercontrol.min.js"></script>
     <script src="libs/leaflet-fullHash.js"></script>
